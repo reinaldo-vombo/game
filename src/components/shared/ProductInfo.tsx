@@ -14,7 +14,7 @@ const ProductInfo = ({ product }: GameItem) => {
 
    return (
       <>
-         <div className='relative overflow-hidden md:h-[36rem]'>
+         <div className='relative overflow-hidden'>
             <video loop={true} autoPlay={true} poster={product.cover_image} controls={false} muted={isMutted} className="absolute min-w-full rounded-lg hidden sm:block">
                <source src={product.video_file} />
             </video>
@@ -40,7 +40,7 @@ const ProductInfo = ({ product }: GameItem) => {
                </div>
                <div className='space-y-5 text-center md:text-left'>
                   <h2 className='h1-semibold'>{product.title}</h2>
-                  <p>Sony Interactive Entertainment</p>
+                  <p>{product.cumpuny}</p>
                   <div className='flex items-center flex-wrap gap-4'>
                      Disponível para
                      {product.avalible.map((item, i) => (
@@ -50,6 +50,11 @@ const ProductInfo = ({ product }: GameItem) => {
                      ))}
                   </div>
                   <h3 className='h3-bold'>{product.price}(kz)</h3>
+                  <div className="flex items-center gap-6">
+                     {product.payment.map((item, i) => (
+                        <Image src={item} width={30} height={30} alt="payment icon" key={i} />
+                     ))}
+                  </div>
                   {product.psn && (
                      <span className='flex items-center gap-3'>
                         <span>
@@ -68,10 +73,24 @@ const ProductInfo = ({ product }: GameItem) => {
                      </button>
                   </div>
                   <div className='space-y-3 grid'>
-                     <span>{product.playes}jogador</span>
+                     <div className="flex items-center gap-3">
+                        <Image src='/people.png' width={20} height={20} alt="icon" />
+                        <span>{product.playes}jogador</span>
+                     </div>
                      {product.online && (
-                        <span>Pronto para jogos offline</span>
+                        <div className="flex items-center gap-3">
+                           <Image src='/no-internet.png' width={20} height={20} alt="icon" />
+                           <span>Pronto para jogos offline</span>
+                        </div>
                      )}
+                     <div className="flex items-center gap-3">
+                        <Image src='/game-controller.png' width={20} height={20} alt="icon" />
+                        <span>Compatível com a Reprodução remota</span>
+                     </div>
+                     <div className="flex items-center gap-3">
+                        <Image src='/vibration-game.png' width={20} height={20} alt="icon" />
+                        <span>Compatível com a função de vibração e o efeito de gatilho (comando sem fios DualSense)</span>
+                     </div>
                   </div>
                </div>
             </div>

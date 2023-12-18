@@ -9,6 +9,7 @@ export interface IGameCard {
 export interface GameItem {
    product: {
       _id: string;
+      payment: string[]
       video_url: string[];
       title: string;
       desc: string;

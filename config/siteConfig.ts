@@ -94,6 +94,7 @@ export const config = {
    GAMES: [
       {
          _id: '12335804',
+         payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: [],
          title: 'God of War',
          category: ['jogo','Acessórios PS5'],
@@ -118,6 +119,7 @@ export const config = {
       },
       {
          _id: '125796',
+         payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: ['https://www.youtube.com/watch?v=zrHb2p4YPT0','https://www.youtube.com/watch?v=PbVKBoDuhZ0','https://www.youtube.com/watch?v=InrHVskqJsE'],
          title: 'CyberPunk 2077',
          category: ['jogo','Acessórios PS5'],
@@ -142,6 +144,7 @@ export const config = {
       },
       {
          _id: '12336834',
+         payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: [],
          title: 'Control',
          category: ['jogo','Acessórios PS5'],
@@ -166,6 +169,7 @@ export const config = {
       },
       {
          _id: '12336834',
+         payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: ['https://www.youtube.com/watch?v=zrHb2p4YPT0','https://www.youtube.com/watch?v=PbVKBoDuhZ0','https://www.youtube.com/watch?v=InrHVskqJsE'],
          title: 'Hogwarts Lagacy',
          category: ['jogo','Acessórios PS5'],
@@ -190,6 +194,7 @@ export const config = {
       },
       {
          _id: '12336834344',
+         payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: ['https://www.youtube.com/watch?v=zrHb2p4YPT0','https://www.youtube.com/watch?v=PbVKBoDuhZ0','https://www.youtube.com/watch?v=InrHVskqJsE'],
          title: 'Diablo® IV',
          category: ['Jogo','Acessórios PS5'],
@@ -214,6 +219,7 @@ export const config = {
       },
       {
          _id: '12335856634604',
+         payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: [],
          title: 'PlayStation 5 (Slim) Disc Console',
          category: ['Acessórios', 'PS5'],
@@ -240,11 +246,12 @@ export const config = {
    ACESSORY: [
       {
          _id: '12335856634604',
+         payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: [],
          title: 'PlayStation 5 (Slim) Disc Console',
          category: ['Acessórios', ],
          desc: '',
-         image: '/ps5.jpg',
+         image: '/ps5-console-featured.webp',
          poster: '/ps5.jpg',
          playes: 1,
          cumpuny: 'Sony Interactive Entertainment',
