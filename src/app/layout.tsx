@@ -25,9 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${nunito.className} blackBg text-white`}>
         <PageProvider>
-          <NavBar />
-          <SideBar />
-          <main className='lg:p-4 lg:ml-[17rem]'>
+          <main className='w-full'>
             {children}
             <Cart />
           </main>

@@ -7,7 +7,7 @@ const Categories = () => {
    const [selectedImage, setSelectedImage] = useState('')
 
    return (
-      <section className='bg-cover bg-center' style={{ backgroundImage: `url(${selectedImage})` }}>
+      <section className='bg-cover bg-center' style={{ backgroundImage: `url(${selectedImage ? selectedImage : '/category-banner.webp'})` }}>
          <div className='flex justify-end'>
             <div className='w-[70%]'>
                <CategoryButton setSelectedImage={setSelectedImage} />

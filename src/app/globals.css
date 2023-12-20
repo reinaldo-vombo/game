@@ -91,6 +91,7 @@
     @apply flex flex-col justify-start items-center md:flex-row;
   }
 
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 3px;
     height: 3px;
@@ -164,5 +165,16 @@ body .swiper-slide {
   background-color: #eeeeee;
   transform: rotateY(180deg);
 }
+.new-games-gradient {
+  background: rgb(55,18,101);
+  background: linear-gradient(0deg, rgba(55,18,101,0.011642156862745057) 0%, #26254f 0%, rgba(0,0,0,1) 55%);
+}
+.overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #09090a8c;
+}
+
 
  

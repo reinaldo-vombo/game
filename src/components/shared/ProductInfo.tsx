@@ -28,7 +28,7 @@ const ProductInfo = ({ product }: GameItem) => {
             </div>
             <div className={`absolute inset-0 bg-gradient-to-r from-black to-transparent ${hideInfo ? '-translate-x-[900px]' : 'translate-x-0'}`} />
             <div className={`absolute inset-0 bg-gradient-to-t from-black from-10% to-transparent to-20% ${hideInfo ? '-translate-x-[900px]' : 'translate-x-0'}`} />
-            <div className={`flex flex-col items-center justify-start relative z-10 md:p-4 gap-4 transition-transform md:flex-row ${hideInfo ? '-translate-x-[900px]' : 'translate-x-0'}`}>
+            <div className={`flex flex-col items-center justify-start relative z-10 md:p-10 gap-4 transition-transform md:flex-row ${hideInfo ? '-translate-x-[900px]' : 'translate-x-0'}`}>
                {showVideo && (
                   <VideoShow videoUrl={product.video_file} />
                )}

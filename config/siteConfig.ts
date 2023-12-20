@@ -8,6 +8,11 @@ const media = [
    { name: 'Media', image: ['/cb-h-1.jpg','/cb-h-2.jpg','/cb-h-3.jpg'], type: 'media', },
 
 ]
+const user = {
+   name: 'Reinaldo Vombo',
+   avatar: 'user.png',
+   role: 'Úsuario da comunidade'
+}
 
 export const config = {
    NAVA_LINK: [
@@ -300,7 +305,47 @@ export const config = {
          color: '#2563eb'
       },
    ],
-   AVERTASIES: [
-      {}
+   NEWGAMES: [
+      {
+         link: 'os-melhores-jogos-de-desport',
+         image: '/db.jpg',
+         title: 'Os melhores jogos de desporto da PlayStation'
+      },
+      {
+         link: 'os-melhores-jogos-de-super-herois',
+         image: '/db.jpg',
+         title: 'Os melhores jogos de super-heróis da PlayStation'
+      },
+      {
+         link: 'os-melhores-jogos-de-terror',
+         image: '/db.jpg',
+         title: 'Os melhores jogos de terror da PlayStation'
+      },
+   ],
+   BLOGS: [
+      {
+         _id: '3r58888t3yh4h4u',
+         slug: '/',
+         title: 'Official PlayStation Podcast Episode 475: 2023 Enters the Halls of Valhalla',
+         image: '/blog-god.webp',
+         descrition: '',
+         author: user
+      },
+      {
+         _id: '3r5t3y333h4h4u',
+         slug: '/',
+         title: 'Share of the Week: Cyberpunk 2077',
+         image: '/blog-cb.webp',
+         descrition: '',
+         author: user
+      },
+      {
+         _id: '3r5t3yy67h4h4u',
+         slug: '/',
+         title: 'Tekken 8: hands-on with Arcade Quest, Super Ghost Battles, and Tekken Ball',
+         image: '/blog-tk.webp',
+         descrition: '',
+         author: user
+      },
    ]
 }
