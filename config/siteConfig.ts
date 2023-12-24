@@ -325,27 +325,47 @@ export const config = {
    BLOGS: [
       {
          _id: '3r58888t3yh4h4u',
-         slug: '/',
+         slug: 'official-playStation-podcast-episode-475',
          title: 'Official PlayStation Podcast Episode 475: 2023 Enters the Halls of Valhalla',
+         subTitle: 'Featuring a discussion with developers from Santa Monica Studio on the God of War Ragnarök free epilogue DLC Valhalla.',
          image: '/blog-god.webp',
          descrition: '',
-         author: user
+         author: user,
+         comment: 1,
+         likes: 20,
+         audio: 1
       },
       {
          _id: '3r5t3y333h4h4u',
-         slug: '/',
+         slug: 'share-of-the-week-cyberpunk-2077',
          title: 'Share of the Week: Cyberpunk 2077',
+         subTitle: '',
          image: '/blog-cb.webp',
          descrition: '',
-         author: user
+         author: user,
+         comment: 1,
+         likes: 20,
+         audio: 1
       },
       {
          _id: '3r5t3yy67h4h4u',
-         slug: '/',
+         slug: 'tekken-8-hands-on-with-arcade-quest',
          title: 'Tekken 8: hands-on with Arcade Quest, Super Ghost Battles, and Tekken Ball',
+         subTitle: '',
          image: '/blog-tk.webp',
          descrition: '',
-         author: user
+         author: user,
+         comment: 1,
+         likes: 20,
+         audio: 1
       },
+   ],
+   EMOJES: [
+      {lable: 'Gosto', icon: '/emoj/like.gif'},
+      {lable: 'Adoro', icon: '/emoj/heart.gif'},
+      {lable: 'Riso', icon: '/emoj/happy.gif'},
+      {lable: 'Supresa', icon: '/emoj/surprised.gif'},
+      {lable: 'Tristeza', icon: '/emoj/sad.gif'},
+      {lable: 'Ira', icon: '/emoj/angry.gif'},
    ]
 }

@@ -1,13 +1,12 @@
 import type { Metadata } from 'next'
-import { Nunito } from 'next/font/google'
-import './globals.css'
-import NavBar from '@/components/shared/NavBar'
-import SideBar from '@/components/shared/SideBar'
 import { PageProvider } from '@/context/Provider'
+import { Nunito } from 'next/font/google'
+import { Toaster } from "@/components/ui/sonner"
 import Cart from '@/components/shared/Cart'
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
+import './globals.css'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -29,6 +28,7 @@ export default function RootLayout({
             {children}
             <Cart />
           </main>
+          <Toaster />
         </PageProvider>
       </body>
     </html>

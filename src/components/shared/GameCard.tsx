@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { toast } from "sonner"
 import Link from 'next/link'
 import React from 'react'
 import Button from './Button'
@@ -15,6 +16,7 @@ const GameCard = ({ title, discount, image, price, slug, _id }: IGameCard) => {
          price,
          quantity: 1
       };
+      toast(`${title} adicionado ao carrinho`)
       addToCart(itemToAdd);
    };
 

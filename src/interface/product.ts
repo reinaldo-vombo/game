@@ -91,3 +91,21 @@ export interface ISliderData {
       
    }[]
 }
+export interface IPageParams {
+   params: {
+      slug: string
+   }
+}
+export interface IBlog {
+   post: {
+      _id: string
+      slug: string
+      title: string
+      subTitle?: string
+      image: string
+      descrition: string
+      comment: number
+      likes: number
+      audio: number
+   }
+}

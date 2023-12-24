@@ -16,7 +16,7 @@
 @layer utilities {
   /* TYPOGRAPHY */
   .h1-bold {
-    @apply text-[64px] font-bold leading-[140%] tracking-tighter;
+    @apply text-[54px] font-bold leading-[140%] tracking-tighter;
   }
 
   .h1-semibold {
@@ -175,6 +175,12 @@ body .swiper-slide {
   inset: 0;
   background-color: #09090a8c;
 }
+.blog-overlay::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(55,18,101);
+  background: linear-gradient(180deg, rgba(55,18,101,0.011642156862745057) 46%, rgba(13,23,31,0.5998774509803921) 66%, rgba(13,23,31,0.9780287114845938) 87%);}
 
 
  

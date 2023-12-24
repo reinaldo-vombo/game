@@ -1,8 +1,18 @@
 'use client'
-import React from 'react'
 import Image from 'next/image'
 import { useProvider } from '@/context/Provider'
 import Link from 'next/link'
+
+import {
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuLabel,
+   DropdownMenuSeparator,
+   DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import Favorites from './Favorites'
+
 
 const NavBar = () => {
    const { handleShowCart, handleShowSidebar } = useProvider()
@@ -30,18 +40,33 @@ const NavBar = () => {
                </div>
             </div>
             <div className='items-center justify-between gap-4 hidden lg:flex'>
-               <Link href='/cart' type='button' aria-label='icon' className='secondary rounded-2xl flex items-center justify-center w-14 h-14'>
+               <Favorites />
+               {/* <Link href='/cart' type='button' aria-label='icon' className='secondary rounded-2xl flex items-center justify-center w-14 h-14'>
                   <Image src='/heart.gif' width={40} height={40} alt='icon' />
-               </Link>
+               </Link> */}
                <button type='button' onClick={handleShowCart} aria-label='icon' className='relative secondary rounded-2xl flex items-center justify-center w-14 h-14'>
                   <Image src='/shopping.gif' width={40} height={40} alt='icon' />
                   <span className="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
                </button>
-               <Link href='/auth/' aria-label='icon' className='secondary relative rounded-2xl flex items-center justify-center gap-7 w-14 md:w-44 h-14'>
+               <DropdownMenu>
+                  <DropdownMenuTrigger className='secondary flex-center gap-6 relative w-14 md:w-44 h-14 rounded-md'>
+                     <Image src='/user.png' className='rounded-full object-cover' width={40} height={40} alt='icon' />
+                     <span className='hidden md:block'>Reinaldo</span>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className='bg-black'>
+                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                     <DropdownMenuSeparator />
+                     <DropdownMenuItem>Profile</DropdownMenuItem>
+                     <DropdownMenuItem>Billing</DropdownMenuItem>
+                     <DropdownMenuItem>Team</DropdownMenuItem>
+                     <DropdownMenuItem>Subscription</DropdownMenuItem>
+                  </DropdownMenuContent>
+               </DropdownMenu>
+               {/* <Link href='/auth/' aria-label='icon' className='secondary relative rounded-2xl flex items-center justify-center gap-7 w-14 md:w-44 h-14'>
                   <Image src='/user.png' className='rounded-full object-cover' width={40} height={40} alt='icon' />
                   <span className="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
                   <span className='hidden md:block'>Reinaldo</span>
-               </Link>
+               </Link> */}
             </div>
          </nav>
       </header>
