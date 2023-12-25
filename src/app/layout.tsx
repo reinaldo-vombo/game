@@ -7,6 +7,8 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import './globals.css'
+import Footer from '@/components/views/Footer'
+import Feedback from '@/components/shared/Feedback'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -24,9 +26,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${nunito.className} blackBg text-white`}>
         <PageProvider>
-          <main className='w-full'>
+          <main className='w-full relative'>
             {children}
             <Cart />
+            <Feedback />
           </main>
           <Toaster />
         </PageProvider>

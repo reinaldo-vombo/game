@@ -2,7 +2,6 @@ import {
    Drawer,
    DrawerClose,
    DrawerContent,
-   DrawerDescription,
    DrawerFooter,
    DrawerHeader,
    DrawerTitle,
@@ -10,6 +9,8 @@ import {
 } from "@/components/ui/drawer"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { config } from "../../../config/siteConfig"
+import Link from "next/link"
 
 const Favorites = () => {
    return (
@@ -20,14 +21,20 @@ const Favorites = () => {
             </Button>
          </DrawerTrigger>
          <DrawerContent className="bg-black">
-            <div className="mx-auto w-full max-w-sm">
+            <div className="container w-full">
                <DrawerHeader>
-                  <DrawerTitle>Move Goal</DrawerTitle>
-                  <DrawerDescription>Set your daily activity goal.</DrawerDescription>
+                  <DrawerTitle>Seus Favoritos</DrawerTitle>
                </DrawerHeader>
-
+               <div className="grid grid-cols-12 gap-3">
+                  {config.GAMES.map((item, i) => (
+                     <div className="col-span-3" key={i}>
+                        <Link href={`/product/${item.slug}`}>
+                           <Image src={item.poster} className="w-56 h-60 object-cover" width={700} height={700} alt={item.title} />
+                        </Link>
+                     </div>
+                  ))}
+               </div>
                <DrawerFooter>
-                  <Button>Submit</Button>
                   <DrawerClose asChild>
                      <Button variant="outline">Cancel</Button>
                   </DrawerClose>

@@ -1,7 +1,6 @@
 'use client'
 import Image from 'next/image'
 import { useProvider } from '@/context/Provider'
-import Link from 'next/link'
 
 import {
    DropdownMenu,
@@ -41,9 +40,7 @@ const NavBar = () => {
             </div>
             <div className='items-center justify-between gap-4 hidden lg:flex'>
                <Favorites />
-               {/* <Link href='/cart' type='button' aria-label='icon' className='secondary rounded-2xl flex items-center justify-center w-14 h-14'>
-                  <Image src='/heart.gif' width={40} height={40} alt='icon' />
-               </Link> */}
+
                <button type='button' onClick={handleShowCart} aria-label='icon' className='relative secondary rounded-2xl flex items-center justify-center w-14 h-14'>
                   <Image src='/shopping.gif' width={40} height={40} alt='icon' />
                   <span className="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>

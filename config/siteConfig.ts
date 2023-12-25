@@ -17,20 +17,20 @@ const user = {
 export const config = {
    NAVA_LINK: [
       {
-         name: 'Para ti',
-         link: '/'
+         name: 'Sobre',
+         link: '/sobre'
       },
       {
-         name: 'Playstation plus',
-         link: '/'
+         name: 'Políticas de Privacidade',
+         link: '/politicas-de-privacidade'
       },
       {
-         name: 'Novos',
-         link: '/'
+         name: 'Políticas de Devolução & Reembolso',
+         link: '/politicas-de-devolucao'
       },
       {
-         name: 'Coleções',
-         link: '/'
+         name: 'Contacte-nos',
+         link: '/contactos'
       },
    ],
    SIDEBAR: [
@@ -307,18 +307,24 @@ export const config = {
    ],
    NEWGAMES: [
       {
-         link: 'os-melhores-jogos-de-desport',
-         image: '/db.jpg',
+         slug: 'os-melhores-jogos-de-desport',
+         image: '/esp.jpg',
+         mainItem: {},
+         cover: '/bg-sp.jpg',
          title: 'Os melhores jogos de desporto da PlayStation'
       },
       {
-         link: 'os-melhores-jogos-de-super-herois',
-         image: '/db.jpg',
+         slug: 'os-melhores-jogos-de-super-herois',
+         image: '/super-h.jpg',
+         mainItem: {},
+         cover: '/bg-sh.jpg',
          title: 'Os melhores jogos de super-heróis da PlayStation'
       },
       {
-         link: 'os-melhores-jogos-de-terror',
-         image: '/db.jpg',
+         slug: 'os-melhores-jogos-de-terror',
+         image: '/horror.jpg',
+         mainItem: {},
+         cover: '/bg-hr.jpg',
          title: 'Os melhores jogos de terror da PlayStation'
       },
    ],
@@ -367,5 +373,19 @@ export const config = {
       {lable: 'Supresa', icon: '/emoj/surprised.gif'},
       {lable: 'Tristeza', icon: '/emoj/sad.gif'},
       {lable: 'Ira', icon: '/emoj/angry.gif'},
+   ],
+   FEEDBAK: [
+      {
+         title: 'Bug',
+         icon: '/bug.gif'
+      },
+      {
+         title: 'Idea',
+         icon: '/idea.gif'
+      },
+      {
+         title: 'Outros',
+         icon: '/outros.gif'
+      },
    ]
 }

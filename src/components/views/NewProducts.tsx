@@ -16,7 +16,7 @@ const NewProducts = () => {
                {config.NEWGAMES.map((game, i) => (
                   <div className='col-span-4 sm:col-span-4' key={i}>
                      <div className='shadow-md rounded-lg'>
-                        <Link href={`/este-mes/${game.link}`}>
+                        <Link href={`/este-mes/${game.slug}`}>
                            <Image src={game.image} className='w-full h-full object-cover rounded-lg' width={500} height={500} alt={game.title} />
                         </Link>
                      </div>

@@ -109,3 +109,11 @@ export interface IBlog {
       audio: number
    }
 }
+export interface INews {
+   post: {
+      slug: string
+      title: string
+      image: string
+      cover: string
+   }
+}
