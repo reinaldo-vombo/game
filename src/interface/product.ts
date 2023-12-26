@@ -94,6 +94,7 @@ export interface ISliderData {
 export interface IPageParams {
    params: {
       slug: string
+      id?: string
    }
 }
 export interface IBlog {
@@ -115,5 +116,24 @@ export interface INews {
       title: string
       image: string
       cover: string
+   }
+}
+export interface ICard {
+   isFlipped: boolean
+   paymentType: string
+   cardNumber: string
+   selectedBank: {
+      fullName: string;
+      name: string;
+      logo: string;
+      color: string;
+   } | null
+   info: {
+      cardOwner: string,
+      cardNumber: string
+      bank?: string
+      month: string
+      year: string
+      cvv: string
    }
 }

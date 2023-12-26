@@ -8,9 +8,10 @@ const media = [
    { name: 'Media', image: ['/cb-h-1.jpg','/cb-h-2.jpg','/cb-h-3.jpg'], type: 'media', },
 
 ]
-const user = {
+export const user = {
+   _id: 'dfhhweuffhu3i',
    name: 'Reinaldo Vombo',
-   avatar: 'user.png',
+   avatar: '/avatar.jpg',
    role: 'Úsuario da comunidade'
 }
 
@@ -386,6 +387,19 @@ export const config = {
       {
          title: 'Outros',
          icon: '/outros.gif'
+      },
+   ],
+   PAYMENT: [
+      {type: 'Multicaixa', icon: '/multicaixa.png'},
+      {type: 'Master card', icon: '/mastercard.svg'},
+      {type: 'Paypall', icon: '/paypal.svg'},
+   ],
+   USERS: [
+      {
+         _id: 'dfhhweuffhu3i',
+         name: 'Reinaldo Vombo',
+         avatar: '/avatar.jpg',
+         role: 'Úsuario da comunidade'
       },
    ]
 }

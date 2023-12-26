@@ -6,10 +6,16 @@ import html2canvas from 'html2canvas';
 import React, { useState } from 'react'
 import { Icon } from '../../../../config/icon'
 import { config } from '../../../../config/siteConfig'
+import { AlertDialog, AlertDialogContent, AlertDialogFooter, AlertDialogTrigger, } from "@/components/ui/alert-dialog"
+import { AlertDialogCancel } from '@radix-ui/react-alert-dialog';
 interface FormData {
   type: string;
   message: string;
   screenShoot: string;
+}
+interface IDialog {
+  image: string
+  clearScreenshot: () => void
 }
 const Feedbacks = () => {
   const [selectedType, setSelectedType] = useState<string>('');
@@ -45,6 +51,10 @@ const Feedbacks = () => {
       console.error('Error capturing screenshot:', error);
     }
   };
+  const clearScreenshot = () => {
+    // Clear the screenShoot value
+    handleInputChange('screenShoot', '');
+  };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -63,17 +73,34 @@ const Feedbacks = () => {
         <Textarea className='bg-slate-600 border-none' placeholder="A tua messagem" onChange={(e) => handleInputChange('message', e.target.value)} />
         <div className="flex-between gap-3">
           <Button className="primary w-full disabled:bg-indigo-300" disabled={!formData.message.trim()}>Enviar</Button>
-          <Button className="primary w-16 p-0" onClick={takeScreenshot}>
-            {formData.screenShoot ? (
-              <Image src={formData.screenShoot} className='w-full h-full' width={400} height={400} alt="Captured Screenshot" />
-            ) : (<Icon.camera width={50} className="w-4" />)}
-
-          </Button>
+          {formData.screenShoot ? (
+            <ImagePreview clearScreenshot={clearScreenshot} image={formData.screenShoot} />
+          ) : (
+            <Button className="primary w-16 p-0" onClick={takeScreenshot}>
+              <Icon.camera width={50} className="w-4" />
+            </Button>
+          )}
         </div>
       </div>
 
     </form>
   )
 }
+const ImagePreview = ({ image, clearScreenshot }: IDialog) => {
+  return (
+    <AlertDialog >
+      <AlertDialogTrigger>
+        <Image src={image} className='w-12 h-8 object-cover rounded-md' width={400} height={400} alt='Captured Screenshot' />
+      </AlertDialogTrigger>
+      <AlertDialogContent className='bg-black border-slate-700'>
+        <Image src={image} className='w-[33rem] h-[33rem] object-cover' width={400} height={400} alt='Captured Screenshot' />
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <Button onClick={clearScreenshot}>Limpar</Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
 
+  )
+}
 export default Feedbacks

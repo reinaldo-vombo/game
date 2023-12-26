@@ -11,10 +11,12 @@ import {
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Favorites from './Favorites'
-
+import Link from 'next/link'
+import { config, user } from '../../../config/siteConfig'
 
 const NavBar = () => {
    const { handleShowCart, handleShowSidebar } = useProvider()
+   const userr = user
    return (
       <header className='hidden md:block text-white'>
          <nav className='flex items-center justify-between px-10 py-6 lg:ml-64'>
@@ -47,13 +49,15 @@ const NavBar = () => {
                </button>
                <DropdownMenu>
                   <DropdownMenuTrigger className='secondary flex-center gap-6 relative w-14 md:w-44 h-14 rounded-md'>
-                     <Image src='/user.png' className='rounded-full object-cover' width={40} height={40} alt='icon' />
+                     <Image src={userr.avatar} className='rounded-full object-cover' width={40} height={40} alt='icon' />
                      <span className='hidden md:block'>Reinaldo</span>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className='bg-black'>
-                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                     <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
                      <DropdownMenuSeparator />
-                     <DropdownMenuItem>Profile</DropdownMenuItem>
+                     <DropdownMenuItem className='hover:bg-slate-900 rounded-md'>
+                        <Link href={`/perfil/${userr._id}`}>Perfil</Link>
+                     </DropdownMenuItem>
                      <DropdownMenuItem>Billing</DropdownMenuItem>
                      <DropdownMenuItem>Team</DropdownMenuItem>
                      <DropdownMenuItem>Subscription</DropdownMenuItem>
