@@ -1,3 +1,5 @@
+import { ReactElement, ReactNode } from "react"
+
 export interface IGameCard {
    _id: string
    title: string
@@ -46,19 +48,6 @@ export interface GameItem {
    type: string;
  }
  
- interface CartItems {
-   _id: string;
-   title: string;
-   image: string;
-   price: number;
-   quantity: number;
- }
- 
- interface BankItem {
-   name: string;
-   logo: string;
-   color?: string; // optional, as mentioned in a previous context
- }
 export interface IAceesory {
    _id: string
    title: string
@@ -136,4 +125,9 @@ export interface ICard {
       year: string
       cvv: string
    }
+}
+export interface IModalDialog {
+   children: ReactNode
+   className: string
+   image: ReactElement
 }

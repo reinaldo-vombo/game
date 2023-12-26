@@ -115,7 +115,7 @@ const EditPhoto = ({ children, className }: IEditor) => {
                {children}
             </div>
             <AlertDialogFooter>
-               <AlertDialogCancel>Cancel</AlertDialogCancel>
+               <AlertDialogCancel className="border-slate-700 hover:primary">Cancel</AlertDialogCancel>
             </AlertDialogFooter>
          </AlertDialogContent>
       </AlertDialog>

@@ -14,7 +14,7 @@ interface IGallery {
 const Gallery = ({ images, image, selectImage, index, color, closeModal }: IGallery) => {
    return (
       <div>
-         <Image src={image} className='object-cover' fill alt='image' />
+         <Image src={image} className='object-cover w-full h-full' fill alt='image' />
          <div className='absolute bottom-0 right-0 left-0 h-[80px] bg-black text-white p-2'>
             <div className='flex-center gap-6'>
                {images.map((src, i) => (

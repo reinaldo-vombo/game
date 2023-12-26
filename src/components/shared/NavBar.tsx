@@ -13,9 +13,14 @@ import {
 import Favorites from './Favorites'
 import Link from 'next/link'
 import { config, user } from '../../../config/siteConfig'
+import { useState } from 'react'
 
 const NavBar = () => {
-   const { handleShowCart, handleShowSidebar } = useProvider()
+   const { handleShowCart, handleShowSidebar, cart } = useProvider()
+   const [searchQuery, setSearchQuery] = useState('')
+
+   const filterdList = config.GAMES.filter(item => item.title.toLowerCase().includes(searchQuery.toLocaleLowerCase()))
+
    const userr = user
    return (
       <header className='hidden md:block text-white'>
@@ -34,10 +39,23 @@ const NavBar = () => {
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                      </svg>
                   </div>
-                  <input type="search" id="default-search" className="block border-none outline-none w-full p-4 ps-10 text-sm text-gray-900 border rounded-2xl secondary focus-within:outline-none  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Search Mockups, Logos..." />
+                  <input type="search" onChange={(e) => setSearchQuery(e.target.value)} className="block border-none outline-none w-full p-4 ps-10 text-sm text-gray-900 border rounded-2xl secondary focus-within:outline-none  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Search Mockups, Logos..." />
                   <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                      <Image src='/category.gif' width={16} height={16} alt='' />
                   </button>
+                  {searchQuery !== '' ? (
+                     <div className='absolute z-10 bg-gray-500 rounded-md w-full p-2'>
+                        <ul className='text-black'>
+                           {filterdList.map((list, i) => (
+                              <li key={i} className='hover:bg-slate-200 hover:text-black rounded-md p-1 text-white text-lg'>
+                                 <Link href={`/product/${list.slug}`}>
+                                    {list.title}
+                                 </Link>
+                              </li>
+                           ))}
+                        </ul>
+                     </div>
+                  ) : null}
                </div>
             </div>
             <div className='items-center justify-between gap-4 hidden lg:flex'>
@@ -45,14 +63,16 @@ const NavBar = () => {
 
                <button type='button' onClick={handleShowCart} aria-label='icon' className='relative secondary rounded-2xl flex items-center justify-center w-14 h-14'>
                   <Image src='/shopping.gif' width={40} height={40} alt='icon' />
-                  <span className="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                  {cart.length >= 1 && (
+                     <span className="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                  )}
                </button>
                <DropdownMenu>
                   <DropdownMenuTrigger className='secondary flex-center gap-6 relative w-14 md:w-44 h-14 rounded-md'>
                      <Image src={userr.avatar} className='rounded-full object-cover' width={40} height={40} alt='icon' />
                      <span className='hidden md:block'>Reinaldo</span>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className='bg-black'>
+                  <DropdownMenuContent className='bg-black border-slate-700'>
                      <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
                      <DropdownMenuSeparator />
                      <DropdownMenuItem className='hover:bg-slate-900 rounded-md'>
@@ -63,11 +83,7 @@ const NavBar = () => {
                      <DropdownMenuItem>Subscription</DropdownMenuItem>
                   </DropdownMenuContent>
                </DropdownMenu>
-               {/* <Link href='/auth/' aria-label='icon' className='secondary relative rounded-2xl flex items-center justify-center gap-7 w-14 md:w-44 h-14'>
-                  <Image src='/user.png' className='rounded-full object-cover' width={40} height={40} alt='icon' />
-                  <span className="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                  <span className='hidden md:block'>Reinaldo</span>
-               </Link> */}
+
             </div>
          </nav>
       </header>

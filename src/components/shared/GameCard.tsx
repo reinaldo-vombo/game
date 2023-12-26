@@ -32,7 +32,7 @@ const GameCard = ({ title, discount, image, price, slug, _id }: IGameCard) => {
          </div>
          <div className='space-y-4'>
             <h2 className='font-semibold'>{title}</h2>
-            <div className='flex-start gap-4'>
+            <div className='flex items-center justify-start gap-4'>
                <p className='primary p-1 rounded-md'>-{discount}%</p>
                <b>{price}(kz)</b>
             </div>

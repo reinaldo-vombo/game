@@ -12,7 +12,7 @@ const Replay = () => {
 
    return (
       <>
-         <form >
+         <form>
             <div className="flex space-x-4">
                <div className="flex-shrink-0">
                   <Image src='/ps.webp' width={400} height={400} alt="User Avatar" className="w-8 h-8 rounded-full" />

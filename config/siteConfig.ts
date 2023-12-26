@@ -69,7 +69,7 @@ export const config = {
          decription: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium corporis dignissimos voluptatem eligendi molestiae ipsum laborum rerum perferendis',
          like: true,
          image: '/lg.jpg',
-         video: '/Medica.mp4',
+         video: '/God-of-War-v.mp4',
          platform: ['PS4','PS5','PC']
       },
       {
@@ -77,7 +77,7 @@ export const config = {
          decription: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium corporis dignissimos voluptatem eligendi molestiae ipsum laborum rerum perferendis',
          like: false,
          image: '/cb.jpeg',
-         video: '',
+         video: '/God-of-War-v.mp4',
          platform: ['PS4','PS5','PC']
       },
       {
@@ -85,7 +85,7 @@ export const config = {
          decription: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium corporis dignissimos voluptatem eligendi molestiae ipsum laborum rerum perferendis',
          like: false,
          image: '/red.jpg',
-         video: '',
+         video: '/God-of-War-v.mp4',
          platform: ['PS4','PS5','PC']
       },
       {
@@ -93,7 +93,7 @@ export const config = {
          decription: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium corporis dignissimos voluptatem eligendi molestiae ipsum laborum rerum perferendis',
          like: true,
          image: '/hz.jpg',
-         video: '',
+         video: '/God-of-War-v.mp4',
          platform: ['PS4','PS5','PC']
       },
    ],

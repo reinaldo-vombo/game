@@ -51,7 +51,7 @@ const TabButton = ({ tabs, color, hasBg }: Tab) => {
                         {inf?.type === 'content' ? (
                            <>
                               <div className="col-span-6">
-                                 <Image src={selectedImage || inf.image[0]} className='w-full' width={500} height={500} alt='' />
+                                 <Image src={selectedImage || inf.image[0]} className='w-full h-auto' width={500} height={500} alt='' />
                               </div>
                               <div className="col-span-6 space-y-6">
                                  <p className='text-[22px]'>{inf.desc}</p>

@@ -1,14 +1,12 @@
 'use client'
-import React, { useState } from 'react';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import { config } from '../../../config/siteConfig';
 import Image from 'next/image';
-import Modal from './Modal';
-import { useProvider } from '@/context/Provider';
+import ModalDialog from './ModalDialog';
 
 const Slider = () => {
-   const { showVideo, handleShowVideo } = useProvider()
 
    return (
       <div className='banner'>
@@ -39,15 +37,25 @@ const Slider = () => {
                         <h2 className='h2-bold'>{image.title}</h2>
                         <div className='flex items-center gap-4'>
                            <button type='button' className='rounded-lg p-2 bg-white text-slate-500 transition-colors hover:primary'>Compar</button>
-                           <button type='button' onClick={handleShowVideo} className='bg-[#ffffff6e] w-10 h-10 rounded-full flex items-center justify-center' aria-label='play icon'>
+                           <ModalDialog
+                              image={<Image src='/play.gif' className='w-5 h-[2.25rem]' width={20} height={20} alt='icon' />}
+                              className='bg-[#ffffff6e] w-10 h-10 rounded-full flex items-center justify-center'>
+
+                              <video
+                                 controls={true}
+                                 muted={false}
+                                 autoPlay={true}
+                                 loop={false}
+                              >
+                                 <source src={image.video} />
+                              </video>
+                           </ModalDialog>
+                           {/* <button type='button' onClick={handleShowVideo} className='bg-[#ffffff6e] w-10 h-10 rounded-full flex items-center justify-center' aria-label='play icon'>
                               <Image src='/play.gif' className='w-5 h-[2.25rem]' width={20} height={20} alt='icon' />
-                           </button>
+                           </button> */}
                         </div>
                      </div>
                   </div>
-                  <Modal isOpen={showVideo} setIsOpen={handleShowVideo}>
-                     <h2>jjjj</h2>
-                  </Modal>
                </SwiperSlide>
             ))}
          </Swiper>

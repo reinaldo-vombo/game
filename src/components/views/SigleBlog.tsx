@@ -31,7 +31,7 @@ const SigleBlog = ({ post }: IBlog) => {
          <div className='px-5 mt-11 space-y-7'>
             <div className='pr-[20%] text-slate-500'>
                <span>December 15, 2023</span>
-               <h2 className='h1-bold'>{post.title}</h2>
+               <h2 className='text-[25px] font-semibold md:h1-bold'>{post.title}</h2>
                <div>
                   <ul className='flex items-center gap-6'>
                      <li className='flex items-center gap-2'><Icon.chat width={20} />{post.comment}</li>
@@ -88,7 +88,7 @@ const SigleBlog = ({ post }: IBlog) => {
             <h3 className='text-slate-500'>Mas não seja um idiota!</h3>
             <p>Por favor, seja gentil, atencioso e construtivo. Denunciar comentários inadequados para</p>
          </div>
-         <div className='p-8 space-y-6'>
+         <div className='p-1 md:p-8 space-y-6'>
             <h2 className='base-medium'>{post.comment}Comentario</h2>
             <Comment />
          </div>

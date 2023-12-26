@@ -2,18 +2,19 @@
 import { useProvider } from '@/context/Provider'
 import Image from 'next/image'
 import Link from 'next/link'
+import Dwonload from './Dwonload'
 
 const SideBar = () => {
    const { showSidebar } = useProvider()
    return (
       <>
-         <aside className={`fixed top-[31px] left-[18px] z-40 w-64 h-[93vh] transition-transform -translate-x-[500px] lg:translate-x-0 ${showSidebar ? 'translate-x-0' : ''}`} aria-label="Sidebar">
+         <aside className={`fixed top-[31px] left-[18px] overflow-hidden z-40 w-64 h-[93vh] transition-transform -translate-x-[500px] lg:translate-x-0 ${showSidebar ? 'translate-x-0' : ''}`} aria-label="Sidebar">
             <div className="h-full rounded-lg px-3 py-4 overflow-y-auto bg-[#1C2C3B] text-white dark:bg-gray-800">
-               <div className='mb-8'>
+               <div className='mb-4'>
                   <Link href='/' className='flex items-center gap-4'>
-                     <Image src='/category.gif' className='w-16' width={20} height={20} alt='' />
+                     <Image src='/category.gif' className='w-12' width={20} height={20} alt='logo' />
                      <span className='grid'>
-                        <b className='text-[32px]'>PLAY</b>
+                        <b className='text-[19px]'>PLAY</b>
                         <span>GameStore</span>
                      </span>
                   </Link>
@@ -47,10 +48,9 @@ const SideBar = () => {
                      </a>
                   </li>
                </ul>
+               <Dwonload />
             </div>
          </aside>
-
-
       </>
    )
 }
