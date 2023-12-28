@@ -50,9 +50,7 @@ const Slider = () => {
                                  <source src={image.video} />
                               </video>
                            </ModalDialog>
-                           {/* <button type='button' onClick={handleShowVideo} className='bg-[#ffffff6e] w-10 h-10 rounded-full flex items-center justify-center' aria-label='play icon'>
-                              <Image src='/play.gif' className='w-5 h-[2.25rem]' width={20} height={20} alt='icon' />
-                           </button> */}
+
                         </div>
                      </div>
                   </div>

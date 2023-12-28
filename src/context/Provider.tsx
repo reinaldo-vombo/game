@@ -13,11 +13,13 @@ interface IProvider {
    removeFromCart: (itemId: string) => void;
    increaseQuantity: (itemId: string) => void
    decreaseQuantity: (itemId: string) => void
+   handleShowSeacheInput: (itemId: string) => void
    showCart: boolean
    total: number
    totalQuantity: number
    cart: CartItem[]
    showVideo: boolean
+   showSearchInput: boolean
    showSidebar: boolean
    showModalGallery: boolean
    isMutted: boolean
@@ -45,13 +47,16 @@ export function PageProvider({ children }: IPageProvider) {
    const [showSidebar, setShowSidebar] = useState(false)
    const [isMutted, setIsMutted] = useState(true)
    const [hideInfo, setHideInfo] = useState(false)
-   const [showAlert, setShowAlert] = useState(false);
+   const [showSearchInput, setShowSearchInput] = useState(false)
    const [showModalGallery, setShowModalGallery] = useState(false)
    const [cart, setCart] = useState<CartItem[]>([]);
 
    //fuctions
    const handleShowCart = () => {
       setShowCart(!showCart)
+   }
+   const handleShowSeacheInput = () => {
+      setShowSearchInput(!showSearchInput)
    }
    const handleShowVideo = () => {
       setShowVideo(!showVideo)
@@ -64,7 +69,6 @@ export function PageProvider({ children }: IPageProvider) {
    }
    const addToCart = (item: CartItem) => {
       const itemInCart = cart.find((cartItem) => cartItem._id === item._id);
-      setShowAlert(true)
       if (itemInCart) {
          setCart((prevCart) =>
             prevCart.map((cartItem) =>
@@ -111,8 +115,10 @@ export function PageProvider({ children }: IPageProvider) {
       handleShowGallery,
       decreaseQuantity,
       showModalGallery,
+      handleShowSeacheInput,
       removeFromCart,
       increaseQuantity,
+      showSearchInput,
       setIsMutted,
       setHideInfo,
       totalQuantity,

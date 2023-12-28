@@ -83,6 +83,7 @@ export interface ISliderData {
 export interface IPageParams {
    params: {
       slug: string
+      searchParams: { [key: string]: string | string[] | undefined }
       id?: string
    }
 }

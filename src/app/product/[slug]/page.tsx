@@ -5,10 +5,34 @@ import ProductInfo from '@/components/shared/ProductInfo'
 import Link from 'next/link'
 import { Icon } from '../../../../config/icon'
 import { IPageParams } from '@/interface/product'
+import { Metadata, ResolvingMetadata } from 'next'
+type Props = {
+   params: { slug: string }
+   searchParams: { [key: string]: string | string[] | undefined }
+}
+export async function generateMetadata(
+   { params, searchParams }: Props,
+   parent: ResolvingMetadata
+): Promise<Metadata> {
+   // read route params
+
+   // fetch data
+   const product = config.GAMES.find(item => item.slug === params.slug)
+
+   // optionally access and extend (rather than replace) parent metadata
+   const previousImages = (await parent).openGraph?.images || []
+   const imageUrl = product ? product.image : ''
+
+   return {
+      title: product?.title,
+      openGraph: {
+         images: [imageUrl, ...previousImages],
+      },
+   }
+}
 
 export default function page({ params }: IPageParams) {
    const product = config.GAMES.find(item => item.slug === params.slug)
-
    if (!product) {
       return <Skeleton />
    }

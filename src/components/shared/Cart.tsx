@@ -1,6 +1,6 @@
 'use client'
 import { toast } from "sonner"
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useProvider } from '@/context/Provider'
 import Image from 'next/image'
 import Counter from './form/Counter'
@@ -9,7 +9,7 @@ import { Icon } from '../../../config/icon'
 
 const showCartAnimation = {
    hidden: { y: 1000 },
-   visible: { y: 0, transition: { duration: 0.5, ease: 'easeInOut' } },
+   visible: { y: 0, transition: { duration: 0.5, ease: 'linear' } },
 }
 const Cart = () => {
    const { showCart, cart, total, removeFromCart, decreaseQuantity, increaseQuantity } = useProvider()
@@ -26,10 +26,9 @@ const Cart = () => {
    };
 
    return (
-      <>
+      <AnimatePresence>
          {showCart && (
-
-            <motion.aside variants={showCartAnimation} initial='hidden' animate={showCart ? 'visible' : 'hidden'} className="fixed top-[72px] right-[28px] z-40 w-[33rem] h-[90vh] transition-transform translate-x-full sm:translate-x-0" aria-label="Sidebar">
+            <motion.aside variants={showCartAnimation} exit={{ y: 0 }} initial='hidden' animate={showCart ? 'visible' : 'hidden'} className="fixed right-0 left-0 top-0 bottom-0 md:top-[72px] md:left-auto md:right-[28px] z-40 w-full md:w-[33rem] h-[90vh] transition-transform translate-x-full sm:translate-x-0" aria-label="Sidebar">
                <div className="h-full rounded-lg px-3 py-4 overflow-y-auto bg-[#1C2C3B] text-white dark:bg-gray-800">
                   <ul>
                      {cart.map((item, i) => (
@@ -54,7 +53,7 @@ const Cart = () => {
                </div>
             </motion.aside>
          )}
-      </>
+      </AnimatePresence>
    )
 }
 

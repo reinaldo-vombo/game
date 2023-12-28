@@ -11,13 +11,17 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { config } from "../../../config/siteConfig"
 import Link from "next/link"
+interface IFavorite {
+   className?: string
+   imgPath: string
+}
 
-const Favorites = () => {
+const Favorites = ({ imgPath, className }: IFavorite) => {
    return (
       <Drawer>
          <DrawerTrigger asChild>
-            <Button className="secondary rounded-2xl flex items-center justify-center w-14 h-14" >
-               <Image src='/heart.gif' width={40} height={40} alt='icon' />
+            <Button className={className} >
+               <Image src={`/icons/${imgPath}`} width={40} height={40} alt='icon' />
             </Button>
          </DrawerTrigger>
          <DrawerContent className="bg-black">

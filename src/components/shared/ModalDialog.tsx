@@ -14,7 +14,7 @@ const ModalDialog = ({ children, className, image }: IModalDialog) => {
             {image}
          </AlertDialogTrigger>
          <AlertDialogContent className="bg-black border-slate-700">
-            <div>
+            <div className="flex items-center justify-center">
                {children}
             </div>
             <AlertDialogFooter>
