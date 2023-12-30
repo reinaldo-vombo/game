@@ -9,7 +9,7 @@ const SubNav = () => {
          <div className="flex-between">
             <div>
                <Link href='/' className='flex items-center gap-2'>
-                  <Image src='/category.gif' className='w-10' width={20} height={20} alt='' />
+                  <Image src='/category.gif' className='w-12 h-12' width={48} height={48} alt='Gamestaore Logo' />
                   <h2>GameStore.<span className='text-[#2993FA]'>Blog</span></h2>
                </Link>
             </div>

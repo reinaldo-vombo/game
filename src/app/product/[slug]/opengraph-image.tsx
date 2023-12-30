@@ -9,7 +9,7 @@ export const size = {
    width: 1200,
    height: 630,
 }
-export default async function Image({ params }: IPageParams) {
+export default async function og({ params }: IPageParams) {
    const post = config.GAMES.find(item => item.slug === params.slug)
    return new ImageResponse(
       (

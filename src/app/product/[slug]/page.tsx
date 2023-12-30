@@ -19,12 +19,22 @@ export async function generateMetadata(
    // fetch data
    const product = config.GAMES.find(item => item.slug === params.slug)
 
+   if (!product) {
+      return {
+         title: 'Não Encontado',
+         description: 'A pagina solicitada não foi econtrada'
+      }
+   }
    // optionally access and extend (rather than replace) parent metadata
    const previousImages = (await parent).openGraph?.images || []
    const imageUrl = product ? product.image : ''
 
    return {
-      title: product?.title,
+      title: product.title,
+      description: product.desc,
+      alternates: {
+         canonical: `/${product?.slug}`
+      },
       openGraph: {
          images: [imageUrl, ...previousImages],
       },

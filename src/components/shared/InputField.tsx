@@ -2,6 +2,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { config } from "../../../config/siteConfig"
 import Link from "next/link"
+import { Button } from "../ui/button"
 
 const InputField = () => {
    const [searchQuery, setSearchQuery] = useState('')
@@ -17,9 +18,9 @@ const InputField = () => {
                </svg>
             </div>
             <input type="search" onChange={(e) => setSearchQuery(e.target.value)} className="block border-none outline-none w-full p-4 ps-10 text-sm text-white border rounded-2xl secondary focus-within:outline-none  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Search Mockups, Logos..." />
-            <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            {/* <Button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                <Image src='/category.gif' width={16} height={16} alt='' />
-            </button>
+            </Button> */}
             {searchQuery !== '' ? (
                <div className='absolute z-10 bg-gray-500 rounded-md w-full p-2'>
                   <ul className='text-black'>
