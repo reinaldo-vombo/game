@@ -29,10 +29,17 @@ const Slider = () => {
          >
             {config.BANNER.map((image, i) => (
                <SwiperSlide key={i}>
-                  <Image src={image.image} className='w-full h-full object-cover rounded-lg' fill priority={false} sizes='100%' alt='image' />
+                  <Image
+                     src={image.image}
+                     className='w-full h-full object-cover rounded-lg'
+                     fill
+                     priority={false}
+                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                     alt={image.title}
+                  />
                   <div className='absolute inset-0 bg-[#00000075] p-4'>
                      <Button type='button' aria-label='icon' className='secondary rounded-md ml-auto flex items-center justify-center relative w-8 h-8'>
-                        <Image src={image.like ? '/red-heart.gif' : '/heart.gif'} fill sizes='100%' alt='heart icon' />
+                        <Image src={image.like ? '/icons/red-heart.gif' : '/icons/with-heart.gif'} fill sizes='100%' alt='heart icon' />
                      </Button>
                      <div className='mt-20 space-y-4'>
                         <h2 className='h2-bold'>{image.title}</h2>

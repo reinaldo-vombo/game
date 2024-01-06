@@ -1,6 +1,6 @@
 'use client'
-import React from 'react'
-import { FreeMode, Pagination } from 'swiper/modules'
+
+import { FreeMode } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { config } from '../../../config/siteConfig'
 import Image from 'next/image'

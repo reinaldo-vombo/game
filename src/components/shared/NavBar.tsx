@@ -17,6 +17,7 @@ import InputField from './InputField'
 import { Button } from '../ui/button'
 import ModalDialog from './ModalDialog'
 import Register from '../views/Register'
+import { Icon } from '../../../config/icon'
 const isLoggin = false
 const NavBar = () => {
    const { handleShowCart, handleShowSidebar, cart } = useProvider()
@@ -31,6 +32,13 @@ const NavBar = () => {
             </Button>
             <InputField />
             <div className='items-center justify-between gap-4 hidden md:flex'>
+               {process.env.NODE_ENV === 'development' && (
+                  <Link href='/studio' target="_blank">
+                     <Button size='sm' variant='ghost'>
+                        <Icon.pencil className='h-5 w-5' />
+                     </Button>
+                  </Link>
+               )}
                <Favorites imgPath='with-heart.gif' className='secondary rounded-2xl flex items-center justify-center w-14 h-14' />
                <Button type='button' onClick={handleShowCart} aria-label='icon' className='relative secondary rounded-2xl flex items-center justify-center w-14 h-14'>
                   <Image src='/shopping.gif' width={40} height={40} alt='icon' />

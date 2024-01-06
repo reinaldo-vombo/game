@@ -13,7 +13,7 @@ interface IDropdown {
 const Dropdown = ({ children, image, className }: IDropdown) => {
    return (
       <DropdownMenu>
-         <DropdownMenuTrigger className={`fixed z-10 primary  rounded-full ${className}`}>
+         <DropdownMenuTrigger aria-label="image icon" className={`fixed z-10 primary  rounded-full ${className}`}>
             {image}
          </DropdownMenuTrigger>
          <DropdownMenuContent className='bg-black p-2 w-72 border-slate-700'>

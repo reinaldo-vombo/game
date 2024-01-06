@@ -1,9 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
 const media = [
-   { icon: '/twitterx.svg', route: '#' },
-   { icon: '/instagram.svg', route: '#' },
-   { icon: '/facebook.svg', route: '#' },
+   { icon: '/twitterx.svg', route: '#', name: 'twitter', },
+   { icon: '/instagram.svg', route: '#', name: 'instagram', },
+   { icon: '/facebook.svg', route: '#', name: 'facebook', },
 ]
 
 const Follow = () => {
@@ -14,8 +14,8 @@ const Follow = () => {
             <h2 className="text-center text-white h3-bold">Segue-nos nas redes sociais</h2>
             <div className="flex-between">
                {media.map((item, i) => (
-                  <Link href={item.route} className="link-hover" aria-label="icon" key={i}>
-                     <Image src={item.icon} width={50} height={50} alt="link" />
+                  <Link href={item.route} className="link-hover" aria-label="social media icon" key={i}>
+                     <Image src={item.icon} width={50} height={50} loading="lazy" alt={item.name} />
                   </Link>
                ))}
             </div>

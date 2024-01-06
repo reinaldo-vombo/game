@@ -2,9 +2,11 @@ import Image from 'next/image'
 import { toast } from "sonner"
 import Link from 'next/link'
 import React from 'react'
-import Button from './Button'
+import ByButton from './Button'
 import { IGameCard } from '@/interface/product'
 import { useProvider } from '@/context/Provider'
+import { Button } from '../ui/button'
+import { formatNumber } from '../../../config/siteConfig'
 
 const GameCard = ({ title, discount, image, price, slug, _id }: IGameCard) => {
    const { addToCart } = useProvider()
@@ -26,21 +28,21 @@ const GameCard = ({ title, discount, image, price, slug, _id }: IGameCard) => {
             <Link href={`/product/${slug}`}>
                <Image src={image} className='w-full h-full rounded-md object-cover' width={600} height={600} alt='game image' />
             </Link>
-            <button className='absolute top-0 right-0'>
-               <Image src='/heart.gif' className='w-6 h-6' width={20} height={20} alt='icon' />
-            </button>
+            <Button className='absolute p-0 top-0 right-0 w-6 h-6' aria-label='heart icon button'>
+               <Image src='/icons/with-heart.gif' className='w-full h-full' width={24} height={24} alt='icon' />
+            </Button>
          </div>
          <div className='space-y-4'>
             <h2 className='font-semibold'>{title}</h2>
             <div className='flex items-center justify-start gap-4'>
                <p className='primary p-1 rounded-md text-black'>-{discount}%</p>
-               <b>{price}(kz)</b>
+               <b>{formatNumber(price)}(kz)</b>
             </div>
             <div className='flex items-center justify-between gap-4'>
-               <Button>Comprar</Button>
-               <button type='button' className='w-8' onClick={handleAddToCart} aria-label='cart bag'>
+               <ByButton>Comprar</ByButton>
+               <Button type='button' className='w-8' onClick={handleAddToCart} aria-label='cart bag'>
                   <Image src='/shopping.gif' width={30} height={30} alt='icon' />
-               </button>
+               </Button>
             </div>
          </div>
       </div>

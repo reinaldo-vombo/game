@@ -14,6 +14,13 @@ export const user = {
    avatar: '/avatar.jpg',
    role: 'Úsuario da comunidade'
 }
+export function formatNumber(number: number) {
+   const [integerPart, decimalPart] = number.toString().split('.');
+   const formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+   const formattedDecimalPart = decimalPart ? `,${decimalPart.slice(0, 2)}` : ',00';
+   const formattedNumber = `${formattedIntegerPart}${formattedDecimalPart}`;
+   return formattedNumber;
+ }
 
 export const config = {
    NAVA_LINK: [
@@ -68,7 +75,7 @@ export const config = {
          title: 'League of Legends',
          decription: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Accusantium corporis dignissimos voluptatem eligendi molestiae ipsum laborum rerum perferendis',
          like: true,
-         image: '/lg.jpg',
+         image: '/lg.webp',
          video: '/God-of-War-v.mp4',
          platform: ['PS4','PS5','PC']
       },
@@ -100,6 +107,8 @@ export const config = {
    GAMES: [
       {
          _id: '12335804',
+         show_case: false,
+         type: 'game',
          payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: [],
          title: 'God of War',
@@ -125,6 +134,8 @@ export const config = {
       },
       {
          _id: '125796',
+         show_case: false,
+         type: 'game',
          payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: ['https://www.youtube.com/watch?v=zrHb2p4YPT0','https://www.youtube.com/watch?v=PbVKBoDuhZ0','https://www.youtube.com/watch?v=InrHVskqJsE'],
          title: 'CyberPunk 2077',
@@ -150,6 +161,8 @@ export const config = {
       },
       {
          _id: '12336834',
+         show_case: false,
+         type: 'game',
          payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: [],
          title: 'Control',
@@ -175,6 +188,8 @@ export const config = {
       },
       {
          _id: '12336834',
+         show_case: false,
+         type: 'game',
          payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: ['https://www.youtube.com/watch?v=zrHb2p4YPT0','https://www.youtube.com/watch?v=PbVKBoDuhZ0','https://www.youtube.com/watch?v=InrHVskqJsE'],
          title: 'Hogwarts Lagacy',
@@ -200,6 +215,8 @@ export const config = {
       },
       {
          _id: '12336834344',
+         show_case: false,
+         type: 'game',
          payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: ['https://www.youtube.com/watch?v=zrHb2p4YPT0','https://www.youtube.com/watch?v=PbVKBoDuhZ0','https://www.youtube.com/watch?v=InrHVskqJsE'],
          title: 'Diablo® IV',
@@ -225,6 +242,8 @@ export const config = {
       },
       {
          _id: '12335856634604',
+         show_case: false,
+         type: 'acessorios',
          payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
          video_url: [],
          title: 'PlayStation 5 (Slim) Disc Console',
@@ -243,7 +262,7 @@ export const config = {
          video_file: '/god-of-war-v.mp4',
          price: 799,
          discount: 30,
-         color: '',
+         color: '#004c8a',
          slug: 'playstation-5-slim-disc-console',
          images: [],
          info: []

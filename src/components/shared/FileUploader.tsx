@@ -29,7 +29,7 @@ const FileUploader = () => {
                         alt={`Preview ${file.name}`}
                      />
 
-                     <Button className='absolute top-0 right-0 bg-black' onClick={clearFiles}>close</Button>
+                     <Button className='absolute top-0 right-0 bg-black' aria-label='cancel previwe' onClick={clearFiles}>close</Button>
                   </div>
                ))
             ) : (

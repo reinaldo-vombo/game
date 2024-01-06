@@ -12,7 +12,7 @@ const Dwonload = () => {
             <Image src='/cb-post.jpg' className='h-full w-10 object-cover' width={400} height={400} alt='game' />
             <div className="w-full">
                <h2>CyberPunk 2077</h2>
-               <Progress value={33} className="w-full h-[.5rem]" />
+               <Progress role="progressbar" aria-labelledby="labeldiv" value={33} className="w-full h-[.5rem]" />
                <span>Baixando</span>
             </div>
          </div>

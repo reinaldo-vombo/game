@@ -2,16 +2,16 @@
 
 import { useProvider } from "@/context/Provider"
 import Image from "next/image"
-import VideoShow from "./form/VideoShow"
 import TabButton from "./TabNutton"
 import GameSlider from "./GameSlider"
 import Button from "./Button"
-import { GameItem } from "@/interface/product"
-import { config } from "../../../config/siteConfig"
+import { ISgleGameItem } from "@/interface/product"
+import { config, formatNumber } from "../../../config/siteConfig"
 import ModalDialog from "./ModalDialog"
 
-const ProductInfo = ({ product }: GameItem) => {
-   const { isMutted, setIsMutted, setHideInfo, hideInfo, showVideo, handleShowVideo } = useProvider()
+
+const ProductInfo = ({ product, relatedproducts }: ISgleGameItem) => {
+   const { isMutted, setIsMutted, setHideInfo, hideInfo, } = useProvider()
 
    return (
       <>
@@ -52,7 +52,7 @@ const ProductInfo = ({ product }: GameItem) => {
                         </span>
                      ))}
                   </div>
-                  <h3 className='h3-bold'>{product.price}(kz)</h3>
+                  <h3 className='h3-bold'>{formatNumber(product.price)}(kz)</h3>
                   <div className="flex items-center justify-center sm:justify-start gap-6">
                      {product.payment.map((item, i) => (
                         <Image src={item} width={30} height={30} alt="payment icon" key={i} />
@@ -75,26 +75,28 @@ const ProductInfo = ({ product }: GameItem) => {
                         <Image src='/shopping.gif' width={40} height={40} alt='icon' />
                      </button>
                   </div>
-                  <div className='space-y-3 grid py-2'>
-                     <div className="flex items-center gap-3">
-                        <Image src='/people.png' width={20} height={20} alt="icon" />
-                        <span>{product.playes}jogador</span>
-                     </div>
-                     {product.online && (
+                  {product.type === 'game' ? (
+                     <div className='space-y-3 grid py-2'>
                         <div className="flex items-center gap-3">
-                           <Image src='/no-internet.png' width={20} height={20} alt="icon" />
-                           <span>Pronto para jogos offline</span>
+                           <Image src='/people.png' width={20} height={20} alt="icon" />
+                           <span>{product.playes}jogador</span>
                         </div>
-                     )}
-                     <div className="flex items-center gap-3">
-                        <Image src='/game-controller.png' width={20} height={20} alt="icon" />
-                        <span>Compatível com a Reprodução remota</span>
+                        {product.online && (
+                           <div className="flex items-center gap-3">
+                              <Image src='/no-internet.png' width={20} height={20} alt="icon" />
+                              <span>Pronto para jogos offline</span>
+                           </div>
+                        )}
+                        <div className="flex items-center gap-3">
+                           <Image src='/game-controller.png' width={20} height={20} alt="icon" />
+                           <span>Compatível com a Reprodução remota</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                           <Image src='/vibration-game.png' width={20} height={20} alt="icon" />
+                           <span>Compatível com a função de vibração e o efeito de gatilho (comando sem fios DualSense)</span>
+                        </div>
                      </div>
-                     <div className="flex items-center gap-3">
-                        <Image src='/vibration-game.png' width={20} height={20} alt="icon" />
-                        <span>Compatível com a função de vibração e o efeito de gatilho (comando sem fios DualSense)</span>
-                     </div>
-                  </div>
+                  ) : null}
                </div>
             </div>
             {product.violance && (
@@ -105,19 +107,19 @@ const ProductInfo = ({ product }: GameItem) => {
                </div>
             )}
          </div>
-         <div className='mt-8'>
+         {/* <div className='mt-8'>
             <div className='gap-7 mt-9 p-4' style={{ background: `${product.color}` }}>
                <TabButton tabs={product.info} hasBg={true} />
             </div>
             <div className='gap-7 mt-9 p-4 bg-cover bg-center' style={{ backgroundImage: `url(${product.alt_cover})` }}>
                <TabButton tabs={product.images} color={product.color} hasBg={false} />
             </div>
-         </div>
+         </div> */}
          <div className='mt-8 space-y-6 container'>
             <div className='text-center sm:text-left'>
                <h2 className='h2-bold'>Jogos relacionados</h2>
             </div>
-            <GameSlider data={config.GAMES} />
+            <GameSlider data={relatedproducts} />
          </div>
       </>
    )

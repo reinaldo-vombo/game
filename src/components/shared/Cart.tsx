@@ -4,8 +4,9 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useProvider } from '@/context/Provider'
 import Image from 'next/image'
 import Counter from './form/Counter'
-import Button from './Button'
+import ByButton from './Button'
 import { Icon } from '../../../config/icon'
+import { Button } from "../ui/button"
 
 const showCartAnimation = {
    hidden: { y: 1000 },
@@ -43,13 +44,13 @@ const Cart = () => {
                               />
                               <b className='text-2xl'>{item.price * item.quantity}(kz)</b>
                            </div>
-                           <button type='button' className='absolute top-0 right-0 z-20 bg-black w-12 h-12 rounded-full flex-center' onClick={() => handleRemoveFromCart(item._id)}>
+                           <Button aria-label="close icon button" className='absolute p-0 top-0 right-0 z-20 bg-black w-12 h-12 rounded-full flex-center' onClick={() => handleRemoveFromCart(item._id)}>
                               <Icon.close width={30} />
-                           </button>
+                           </Button>
                         </li>
                      ))}
                   </ul>
-                  <Button>Total <b>{total}(kz)</b></Button>
+                  <ByButton>Total <b>{total}(kz)</b></ByButton>
                </div>
             </motion.aside>
          )}

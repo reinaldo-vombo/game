@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Icon } from '../../../../config/icon'
 import { IPageParams } from '@/interface/product'
 import { Metadata, ResolvingMetadata } from 'next'
+import { fetchProducts, singleProduct } from '@/app/action'
 type Props = {
    params: { slug: string }
    searchParams: { [key: string]: string | string[] | undefined }
@@ -17,7 +18,7 @@ export async function generateMetadata(
    // read route params
 
    // fetch data
-   const product = config.GAMES.find(item => item.slug === params.slug)
+   const product = await singleProduct(`${params.slug}`)
 
    if (!product) {
       return {
@@ -41,8 +42,13 @@ export async function generateMetadata(
    }
 }
 
-export default function page({ params }: IPageParams) {
-   const product = config.GAMES.find(item => item.slug === params.slug)
+export default async function page({ params }: IPageParams) {
+   const product = await singleProduct(`${params.slug}`)
+   const category = product.category[0].title;
+
+
+   const relatedproducts = await fetchProducts(`${category}`)
+
    if (!product) {
       return <Skeleton />
    }
@@ -54,7 +60,7 @@ export default function page({ params }: IPageParams) {
                <b>Home</b>
             </Link>
          </div>
-         <ProductInfo product={product} />
+         <ProductInfo relatedproducts={relatedproducts} product={product} />
       </>
    )
 }

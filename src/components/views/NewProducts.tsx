@@ -6,7 +6,13 @@ import Link from 'next/link'
 const NewProducts = () => {
    return (
       <section className='new-games-gradient relative py-[50px] sm:h-[75vh] rounded-lg'>
-         <Image src='/new-games-banner.webp' className='absolute inset-0 object-cover w-full h-full rounded-lg' width={900} height={900} alt='new game banner' />
+         <Image src='/new-games-banner.webp'
+            className='absolute inset-0 object-cover w-full h-full rounded-lg'
+            fill
+            quality={100}
+            sizes='100%'
+            alt='new game banner'
+         />
          <div className="relative text-center sm:text-left m-auto inset-0 w-full px-8 md:px-0 md:w-[75%] text-white space-y-6">
             <h2 className='h2-bold'>
                ESTE MÊS <br /> <span></span>NA GAMESTORE

@@ -2,11 +2,11 @@ import React from 'react'
 import Slider from '../shared/Slider'
 import { config } from '../../../config/siteConfig'
 import GameSlider from '../shared/GameSlider'
+import { fetchProducts } from '@/app/action'
 
-const Hero = () => {
-   const gameToFilter = ['jogo', 'Acessórios PS5'];
-   const gameFilter = config.GAMES.filter(item => item.category && item.category.some(cat => gameToFilter.includes(cat.toLowerCase())));
-
+const Hero = async () => {
+   const Newproducts = await fetchProducts('jogo')
+   const Acessóriosproducts = await fetchProducts('Acessórios PS5')
    return (
       <section>
          <Slider />
@@ -18,10 +18,10 @@ const Hero = () => {
                <h2 className='font-semibold text-blue-500'>Mais Jogos</h2>
             </div>
             <div className='space-y-32'>
-               <GameSlider data={gameFilter} />
+               <GameSlider data={Newproducts} />
                <div className='space-y-5'>
                   <h2 className='h3-bold'>Acessórios</h2>
-                  <GameSlider data={config.ACESSORY} />
+                  <GameSlider data={Acessóriosproducts} />
                </div>
             </div>
          </div>

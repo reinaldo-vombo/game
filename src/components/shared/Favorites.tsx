@@ -20,8 +20,8 @@ const Favorites = ({ imgPath, className }: IFavorite) => {
    return (
       <Drawer>
          <DrawerTrigger asChild>
-            <Button className={className} >
-               <Image src={`/icons/${imgPath}`} width={40} height={40} alt='icon' />
+            <Button aria-label="image" className={className} >
+               <Image src={`/icons/${imgPath}`} width={40} height={40} alt='image icon' />
             </Button>
          </DrawerTrigger>
          <DrawerContent className="bg-black">

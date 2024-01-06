@@ -6,6 +6,7 @@ import Follow from "@/components/views/Follow";
 import Main from "@/components/shared/Main";
 
 export default function Home() {
+
   return (
     <Main>
       <div className="relative space-y-10">

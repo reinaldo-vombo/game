@@ -8,7 +8,7 @@ export interface IGameCard {
    price: number
    discount: number
 }
-export interface GameItem {
+export interface ISgleGameItem {
    product: {
       _id: string;
       payment: string[]
@@ -23,6 +23,7 @@ export interface GameItem {
       avalible: string[];
       violance: string[];
       psn: string;
+      type: string
       cover_image: string;
       alt_cover: string;
       video_file: string;
@@ -33,6 +34,33 @@ export interface GameItem {
       images: MediaItem[];
       info: TabItem[];
    }
+   relatedproducts: GameItem[]
+ }
+export interface GameItem {
+   _id: string;
+   payment: string[]
+   video_url: string[];
+   title: string;
+   category: { title: string }[]
+   desc: string;
+   image: string;
+   poster: string;
+   playes: number;
+   cumpuny: string;
+   online: boolean;
+   avalible: string[];
+   violance: string[];
+   psn: string;
+   type: string
+   cover_image: string;
+   alt_cover: string;
+   video_file: string;
+   price: number;
+   discount: number;
+   color: string;
+   slug: string;
+   images: MediaItem[];
+   info: TabItem[];
  }
  
  export interface TabItem {
