@@ -10,7 +10,6 @@ import {
    DropdownMenuSeparator,
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { user } from '../../../config/siteConfig'
 import Favorites from './Favorites'
 import Link from 'next/link'
 import InputField from './InputField'
@@ -18,8 +17,13 @@ import { Button } from '../ui/button'
 import ModalDialog from './ModalDialog'
 import Register from '../views/Register'
 import { Icon } from '../../../config/icon'
-const isLoggin = false
-const NavBar = () => {
+import { IUser } from '@/interface/user'
+
+
+const NavBar = ({ user }: IUser) => {
+   const firstName = user.name.split(' ')[0];
+   user.firstName = firstName;
+   const isLoggin = user ? true : false
    const { handleShowCart, handleShowSidebar, cart } = useProvider()
    return (
       <header className='hidden md:block text-white'>
@@ -49,8 +53,8 @@ const NavBar = () => {
                {isLoggin ? (
                   <DropdownMenu>
                      <DropdownMenuTrigger className='secondary flex-center gap-6 relative w-14 md:w-44 h-14 rounded-md'>
-                        <Image src={user.avatar} className='rounded-full object-cover' width={40} height={40} alt='icon' />
-                        <span className='hidden md:block'>Reinaldo</span>
+                        <Image src={user.image} className='rounded-full object-cover' width={40} height={40} alt='icon' />
+                        <span className='hidden md:block'>{firstName}</span>
                      </DropdownMenuTrigger>
                      <DropdownMenuContent className='bg-black border-slate-700'>
                         <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>

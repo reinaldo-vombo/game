@@ -10,6 +10,15 @@ import { v4 as uuid } from 'uuid'
 import { client } from "../../sanity/lib/client"
 import { DecodedToken } from "@/interface/token";
 
+export async function getUser() {
+  const getUser = cookies().get('player');
+  const userString = getUser?.value;
+
+  const user = userString ? JSON.parse(userString) : null;
+  return user;
+}
+
+
 export const register = async (e: FormData) => {
    const name = e.get('name')?.toString()
    const email = e.get('email')?.toString()
@@ -23,7 +32,7 @@ export const register = async (e: FormData) => {
 
    try {
       const userId = uuid();
-      const hashedPassword = await hash(password, 10);
+      // const hashedPassword = await hash(password, 10);
       const token = jwt.sign({ userId, email }, process.env.NEXT_PUBLIC_TOKEN_KEY , { expiresIn: '1h' });
 
       await client.create({
@@ -31,9 +40,10 @@ export const register = async (e: FormData) => {
          _id: userId,
          name,
          email,
-         password: hashedPassword,
+         password,
          token
       });
+      revalidatePath('/')
       return {
          success: true,
        };
@@ -45,7 +55,6 @@ export const register = async (e: FormData) => {
     };
    }
    
-   revalidatePath('/')
 }
 export const lognin = async (e: FormData) => {
    const email = e.get('email')?.toString()
@@ -53,7 +62,7 @@ export const lognin = async (e: FormData) => {
    
    if ( !email || !password) {
       return {
-         error: 'Incomplete form data',
+         error: 'Prencha todos os campos',
        };
    }
    try {
@@ -88,15 +97,19 @@ export const lognin = async (e: FormData) => {
          `*[_type == 'user' && _id == $userId  ][0]{
            _id,
            name,
-           email
+           email,
+           'image' : image.asset->url
            // Add other necessary fields
          }`,
          {
             userId
          }
        );
-       cookies().set(user)
-      
+
+       const userString = JSON.stringify(user);
+
+       cookies().set('player',userString)
+       revalidatePath('/')
       return {
          success: true,
        };
@@ -109,7 +122,53 @@ export const lognin = async (e: FormData) => {
     };
    }
 
-} 
+}
+export const logout = async () => {
+   cookies().delete('player')
+}
+export const postFeedbak = async (e: FormData) => {
+   const user = await getUser()
+
+   const type = e.get('type')?.toString()
+   const message = e.get('message')?.toString()
+   const imageUrl = e.get('imageUrl')?.toString()
+   
+   if (!type || !message || !imageUrl) {
+      return {
+      error: 'Por-favor prencha todos os campos',
+      };
+   }
+   
+ const postId = uuid();
+ const feedbackData = {
+   _type: 'feedbacks',
+   _id: postId,
+   type,
+   message,
+   screeshot: imageUrl,
+   posteby: {
+      _type: 'reference',
+      _ref: user._id,
+    },
+}
+
+   try {
+      await client.create(feedbackData);
+
+      revalidatePath('/');
+
+      return {
+         success: true,
+      };
+
+   } catch (error) {
+    console.error('Error posting feedback:', error);
+    return {
+      error: 'Failed to post feedback',
+    };
+  }
+   
+}
 export const fetchProducts = async (category: string) => {
    const product = await client.fetch<GameItem[]>(
       `*[_type == "games" && $category in category[]->title] {

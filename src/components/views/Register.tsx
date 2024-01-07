@@ -51,10 +51,9 @@ const Register = () => {
       }
    }
    async function LogninAction(formData: FormData) {
+      setIsLoading(true)
       const result = await lognin(formData)
       if (result?.error) {
-         console.log(result.error);
-
 
          setIsLoading(false)
          toast('Ocorreu um erro, por-favor tente de novo')
