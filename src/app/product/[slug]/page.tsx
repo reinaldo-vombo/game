@@ -1,5 +1,4 @@
 
-import { config } from '../../../../config/siteConfig'
 import Skeleton from '@/components/shared/Skeleton'
 import ProductInfo from '@/components/shared/ProductInfo'
 import Link from 'next/link'
@@ -60,7 +59,7 @@ export default async function page({ params }: IPageParams) {
                <b>Home</b>
             </Link>
          </div>
-         <ProductInfo relatedproducts={relatedproducts} product={product} />
+         <ProductInfo category={category} relatedproducts={relatedproducts} product={product} />
       </>
    )
 }

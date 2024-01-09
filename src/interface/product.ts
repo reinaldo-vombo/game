@@ -34,7 +34,8 @@ export interface ISgleGameItem {
       images: MediaItem[];
       info: TabItem[];
    }
-   relatedproducts: GameItem[]
+   relatedproducts: GameItem[],
+   category: string
  }
 export interface GameItem {
    _id: string;
@@ -97,7 +98,7 @@ export interface ICart{
    quantity: number
 }
 export interface ISliderData {
-   data: {
+   product: {
       _id: string
       title: string
       slug: string
@@ -105,8 +106,10 @@ export interface ISliderData {
       price: number
       discount: number
       video_file: string
-      
    }[]
+   category: string
+   showArrows?: boolean
+   children?: ReactElement
 }
 export interface IPageParams {
    params: {

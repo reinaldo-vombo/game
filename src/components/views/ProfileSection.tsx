@@ -1,3 +1,4 @@
+'use client'
 import {
    AlertDialog,
    AlertDialogCancel,
@@ -7,30 +8,25 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Icon } from "../../../config/icon"
 import Image from "next/image"
-import Main from "../shared/Main"
 import { ReactNode } from "react"
 import FileUploader from "../shared/FileUploader"
-interface IUser {
-   user: {
-      _id: string
-      name: string
-      avatar: string
-      role: string
-   }
-}
-
+import { useProvider } from "@/context/Provider"
+import Skeleton from "../shared/Skeleton"
 interface IEditor {
    children: ReactNode
    className: string
 }
 
-const ProfileSection = ({ user }: IUser) => {
-
+const ProfileSection = () => {
+   const { user } = useProvider()
+   if (!user) {
+      return <Skeleton />
+   }
    return (
-      <Main>
+      <>
          <div className="h-64 relative rounded-md bg-cover bg-center flex" style={{ backgroundImage: `url(/category-banner.webp)` }}>
             <div className="absolute bottom-[-46px] left-9 flex items-center gap-4">
-               <Image src={user.avatar} className="w-32 h-32 rounded-full border border-black" width={400} height={400} alt={user.name} />
+               <Image src={user.image} className="w-32 h-32 rounded-full border border-black" width={400} height={400} alt={user.name} />
                <b>{user.name}</b>
                <EditPhoto className="absolute right-[142px] top-[91px]">
                   <FileUploader />
@@ -101,7 +97,7 @@ const ProfileSection = ({ user }: IUser) => {
 
             </div>
          </div>
-      </Main>
+      </>
    )
 }
 const EditPhoto = ({ children, className }: IEditor) => {

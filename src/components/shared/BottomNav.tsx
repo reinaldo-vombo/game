@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Button } from "../ui/button"
 import { Separator } from "../ui/separator"
-import { user } from "../../../config/siteConfig"
+import { fakeUser } from "../../../config/siteConfig"
 import {
    DropdownMenu,
    DropdownMenuContent,
@@ -50,13 +50,13 @@ const BottomNav = () => {
                <div className="flex items-center justify-center">
                   <DropdownMenu>
                      <DropdownMenuTrigger aria-label="image icon" className='flex-center relative w-[2.75rem] h-[2.75rem] rounded-full'>
-                        <Image src={user.avatar} className='rounded-full' fill sizes="100%" loading="lazy" alt={use.name} />
+                        <Image src={fakeUser.avatar} className='rounded-full' fill sizes="100%" loading="lazy" alt={use.name} />
                      </DropdownMenuTrigger>
                      <DropdownMenuContent className='bg-black border-slate-700'>
                         <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className='hover:bg-slate-900 rounded-md'>
-                           <Link href={`/perfil/${user._id}`}>Perfil</Link>
+                           <Link href={`/perfil/${fakeUser._id}`}>Perfil</Link>
                         </DropdownMenuItem>
                         <DropdownMenuItem>Billing</DropdownMenuItem>
                         <DropdownMenuItem>Team</DropdownMenuItem>

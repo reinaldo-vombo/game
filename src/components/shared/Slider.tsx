@@ -6,6 +6,10 @@ import { config } from '../../../config/siteConfig';
 import Image from 'next/image';
 import ModalDialog from './ModalDialog';
 import { Button } from '../ui/button';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
+
 
 const Slider = () => {
 

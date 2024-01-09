@@ -1,8 +1,7 @@
 import React from 'react'
 import Slider from '../shared/Slider'
-import { config } from '../../../config/siteConfig'
-import GameSlider from '../shared/GameSlider'
 import { fetchProducts } from '@/app/action'
+import ProductSlider from '../shared/ProductSlider'
 
 const Hero = async () => {
    const Newproducts = await fetchProducts('jogo')
@@ -18,10 +17,10 @@ const Hero = async () => {
                <h2 className='font-semibold text-blue-500'>Mais Jogos</h2>
             </div>
             <div className='space-y-32'>
-               <GameSlider data={Newproducts} />
+               <ProductSlider category='jogo' product={Newproducts} />
                <div className='space-y-5'>
                   <h2 className='h3-bold'>Acessórios</h2>
-                  <GameSlider data={Acessóriosproducts} />
+                  <ProductSlider showArrows={false} category={'Acessórios PS5'} product={Acessóriosproducts} />
                </div>
             </div>
          </div>

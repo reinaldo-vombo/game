@@ -20,7 +20,7 @@ const BlogPostCard = ({ title, descrition, image, slug }: IBlogCard) => {
             <div className='h-[4.5rem]'>
                <h3 className='font-semibold text-[18px]'>{title}</h3>
             </div>
-            <p className='font-normal'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, vero culpa ullam blanditiis est numquam, </p>
+            <p className='font-normal line-clamp-4'>{descrition}</p>
             <div className='flex items-center gap-6'>
                <div className='w-8 h-8 relative'>
                   <Image src='/ps.webp' className='rounded-lg' fill sizes='100%' loading='lazy' alt='user' />

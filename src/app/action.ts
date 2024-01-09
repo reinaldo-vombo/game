@@ -9,6 +9,7 @@ import jwt from 'jsonwebtoken';
 import { v4 as uuid } from 'uuid'
 import { client } from "../../sanity/lib/client"
 import { DecodedToken } from "@/interface/token";
+import { IBlogs } from "@/interface/blogs";
 
 export async function getUser() {
   const getUser = cookies().get('player');
@@ -112,6 +113,7 @@ export const lognin = async (e: FormData) => {
        revalidatePath('/')
       return {
          success: true,
+         user
        };
       
    } catch (error) {
@@ -125,6 +127,28 @@ export const lognin = async (e: FormData) => {
 }
 export const logout = async () => {
    cookies().delete('player')
+}
+export const fetchBlogs = async () => {
+   const blogs = await client.fetch<IBlogs[]>(
+      `*[_type == "blog"]{
+      _id,
+      'cover_image': cover_image.asset->url,
+      "slug": slug.current,
+      descrition,
+      content
+   }`)
+   return blogs
+}
+export const fetchSigleBlog = async (slug: string) => {
+   const blogs = await client.fetch<IBlogs>(
+      `*[_type == "blog" && slug.current == $slug][0]{
+      _id,
+      'cover_image': cover_image.asset->url,
+      "slug": slug.current,
+      descrition,
+      content
+   }`, {slug})
+   return blogs
 }
 export const postFeedbak = async (e: FormData) => {
    const user = await getUser()
@@ -196,6 +220,45 @@ export const fetchProducts = async (category: string) => {
          color,
          "slug": slug.current
       }`, {category})
+    return product
+}
+export const getAllProduct = async () => {
+   const product = await client.fetch<GameItem[]>(
+      `*[_type == "games"] {
+         _id,
+         show_case,
+         type,
+         payment,
+         title,
+         category[]->{
+            title
+         },
+         'image' : image.asset->url,
+         'poster' : poster.asset->url,
+         playes,
+         cumpuny,
+         online,
+         avalible,
+         violance,
+         psn,
+         'cover_image': cover_image.asset->url,
+         video_file,
+         price,
+         discount,
+         price,
+         color,
+         "slug": slug.current
+      }`)
+    return product
+}
+export const searchProduct = async (searchTerm: string) => {
+   const product = await client.fetch<GameItem[]>(
+      `*[_type == "games" && title match $searchTerm] {
+         _id,
+         title,
+         'poster' : poster.asset->url,
+         "slug": slug.current
+      }`,{searchTerm})
     return product
 }
 export const singleProduct = async (slug: string) => {

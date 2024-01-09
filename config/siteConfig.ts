@@ -8,7 +8,7 @@ const media = [
    { name: 'Media', image: ['/cb-h-1.jpg','/cb-h-2.jpg','/cb-h-3.jpg'], type: 'media', },
 
 ]
-export const user = {
+export const fakeUser = {
    _id: 'dfhhweuffhu3i',
    name: 'Reinaldo Vombo',
    avatar: '/avatar.jpg',
@@ -356,7 +356,7 @@ export const config = {
          subTitle: 'Featuring a discussion with developers from Santa Monica Studio on the God of War Ragnarök free epilogue DLC Valhalla.',
          image: '/blog-god.webp',
          descrition: '',
-         author: user,
+         author: fakeUser,
          comment: 1,
          likes: 20,
          audio: 1
@@ -368,7 +368,7 @@ export const config = {
          subTitle: '',
          image: '/blog-cb.webp',
          descrition: '',
-         author: user,
+         author: fakeUser,
          comment: 1,
          likes: 20,
          audio: 1
@@ -380,7 +380,7 @@ export const config = {
          subTitle: '',
          image: '/blog-tk.webp',
          descrition: '',
-         author: user,
+         author: fakeUser,
          comment: 1,
          likes: 20,
          audio: 1

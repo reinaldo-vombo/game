@@ -126,23 +126,15 @@ export const games = defineType({
       type: 'file',
     },
     {
-      name: 'images',
+      name: 'game_info',
       type: 'reference',
-      to: [{ type: 'media' }]
+      description: 'Informaçao',
+      to: [{ type: 'product_info' }]
     },
     {
-      name: 'info',
-      type: 'document',
-      fields: [
-        {
-          name: 'game_info',
-          title: 'informação',
-          type: 'reference',
-          weak: true,
-          to: [{type: 'tabs'}],
-          description: 'Which movie are we screening'
-        },
-      ]
+      name: 'capas',
+      type: 'reference',
+      to: [{ type: 'skins' }]
     },
   ],
 })

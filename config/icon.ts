@@ -1,7 +1,8 @@
-import { MagnifyingGlassIcon, ArrowPathIcon, PencilSquareIcon, ChevronUpIcon, GlobeEuropeAfricaIcon, MapPinIcon, EnvelopeIcon, CalendarDaysIcon, CameraIcon, PhoneIcon, GifIcon, FaceSmileIcon, PaperAirplaneIcon, ArrowUturnRightIcon, MicrophoneIcon, HeartIcon, UserIcon, ChatBubbleBottomCenterIcon, ChevronDownIcon, XMarkIcon, HomeIcon, LightBulbIcon } from '@heroicons/react/24/solid'
+import { MagnifyingGlassIcon, ArrowPathIcon, ArchiveBoxXMarkIcon, PencilSquareIcon, ChevronUpIcon, GlobeEuropeAfricaIcon, MapPinIcon, EnvelopeIcon, CalendarDaysIcon, CameraIcon, PhoneIcon, GifIcon, FaceSmileIcon, PaperAirplaneIcon, ArrowUturnRightIcon, MicrophoneIcon, HeartIcon, UserIcon, ChatBubbleBottomCenterIcon, ChevronDownIcon, XMarkIcon, HomeIcon, LightBulbIcon } from '@heroicons/react/24/solid'
 export const Icon = {
    chat: ChatBubbleBottomCenterIcon,
    loader: ArrowPathIcon,
+   ArchiveBox: ArchiveBoxXMarkIcon,
    calendarDay: CalendarDaysIcon,
    chevronDown: ChevronDownIcon,
    chevronUp: ChevronUpIcon,

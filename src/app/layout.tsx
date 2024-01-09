@@ -7,11 +7,10 @@ import Cart from '@/components/shared/Cart'
 import Image from 'next/image'
 import Dropdown from '@/components/shared/Dropdown'
 import Feedbacks from '@/components/shared/form/Feedbacks'
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
 import './globals.css'
 import BottomNav from '@/components/shared/BottomNav'
+import QueryProvider from '@/context/QueryProvider'
+import { CookiesProvider } from 'next-client-cookies/server';
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -48,16 +47,21 @@ export default function RootLayout({
     <html lang="pt">
       <body className={`${nunito.className} blackBg text-white`}>
         <PageProvider>
-          <main className='w-full relative'>
-            {children}
-            <BottomNav />
-            <Cart />
-            <Dropdown className='hidden right-0 bottom-0 gap-6 w-14 h-14 sm:block' image={<Image src='/elipse.gif' className='absolute z-10 m-auto inset-0 object-cover' width={40} height={40} alt='icon' />}>
-              <h2 className="text-center">Portal de feedbacks</h2>
-              <Separator className="my-4 bg-slate-700" />
-              <Feedbacks />
-            </Dropdown>
-          </main>
+          <QueryProvider>
+            <CookiesProvider>
+              <main className='w-full relative'>
+                {children}
+                <BottomNav />
+                <Cart />
+                <Dropdown className='hidden right-0 bottom-0 gap-6 w-14 h-14 sm:block' image={<Image src='/elipse.gif' className='absolute z-10 m-auto inset-0 object-cover' width={40} height={40} alt='icon' />}>
+                  <h2 className="text-center">Portal de feedbacks</h2>
+                  <Separator className="my-4 bg-slate-700" />
+                  <Feedbacks />
+                </Dropdown>
+              </main>
+            </CookiesProvider>
+
+          </QueryProvider>
           <Toaster />
         </PageProvider>
       </body>

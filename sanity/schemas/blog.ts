@@ -1,6 +1,6 @@
 import { defineType } from "sanity"
 
-export const product = defineType({
+export const blogs = defineType({
   name: "blog",
   title: "Eventos",
   type: "document",
@@ -11,11 +11,16 @@ export const product = defineType({
       type: "string",
     },
     {
+      name: "descrition",
+      title: "Sub descrição",
+      type: "string",
+    },
+    {
       name: "slug",
       title: "Slug",
       type: "slug",
       options: {
-        source: "name",
+        source: "title",
       },
     },
     {
@@ -31,9 +36,35 @@ export const product = defineType({
     },
     {
       name: "postedby",
-      title: "Postado por",
-      type: "string",
+      title: "Author",
+      type: 'reference',
+      to: [{ type: 'user' }],
     },
-    
+    {
+      name: "content",
+      title: "Conteúdo",
+      type: "array",
+      of: [
+        {
+          type: 'block'
+        },
+        {
+          type: 'image',
+          fields: [
+            {
+              type: 'text',
+              name: 'alt',
+              title: 'Alternative text',
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "comments",
+      title: "Comentarios",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "comment" }] }],
+    },
   ],
 })

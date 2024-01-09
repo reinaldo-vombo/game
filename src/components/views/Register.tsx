@@ -17,12 +17,14 @@ import {
    TabsTrigger,
 } from "@/components/ui/tabs"
 import { lognin, register } from "@/app/action"
+import { useCookies } from 'next-client-cookies';
 import { useState } from "react"
 import { Icon } from "../../../config/icon"
 
 
 const Register = () => {
    const [isLoading, setIsLoading] = useState(false)
+   const cookies = useCookies();
 
    // function isValidEmail(email: string | null) {
    //    if (!email) {
@@ -60,7 +62,11 @@ const Register = () => {
       } else {
          toast('Bem vindo de volta jogador')
          setIsLoading(false)
+         cookies.set('user', result.user)
+         console.log(result.user);
+
       }
+
    }
    return (
       <Tabs defaultValue="signin" className="w-[400px]">

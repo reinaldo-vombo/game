@@ -1,6 +1,9 @@
 'use client'
 import { CartItem } from '@/interface/product'
-import React, { ReactNode, createContext, useContext, useState } from 'react'
+import { IUser } from '@/interface/user'
+import { currentUser } from '@/utils/userUtils'
+
+import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react'
 interface IPageProvider {
    children: ReactNode
 }
@@ -14,6 +17,7 @@ interface IProvider {
    increaseQuantity: (itemId: string) => void
    decreaseQuantity: (itemId: string) => void
    handleShowSeacheInput: (itemId: string) => void
+   user: IUser | null
    showCart: boolean
    total: number
    totalQuantity: number
@@ -50,6 +54,21 @@ export function PageProvider({ children }: IPageProvider) {
    const [showSearchInput, setShowSearchInput] = useState(false)
    const [showModalGallery, setShowModalGallery] = useState(false)
    const [cart, setCart] = useState<CartItem[]>([]);
+   const [user, setUser] = useState<IUser | null>(null);
+
+
+   useEffect(() => {
+      const getUserData = async () => {
+         try {
+            const user = await currentUser();
+            setUser(user);
+         } catch (error) {
+            console.error('Error fetching user data:', error);
+         }
+      };
+
+      getUserData();
+   }, []);
 
    //fuctions
    const handleShowCart = () => {
@@ -129,7 +148,8 @@ export function PageProvider({ children }: IPageProvider) {
       hideInfo,
       showCart,
       total,
-      cart
+      cart,
+      user
    }
    return (
       <MainContext.Provider value={value}>

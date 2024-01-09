@@ -1,34 +1,39 @@
-import React from 'react'
-import { config } from '../../../config/siteConfig'
+'use client'
+import { useQuery } from '@tanstack/react-query'
 import BlogPostCard from '../shared/BlogPostCard'
+import { fetchBlogs } from '@/app/action'
+import { IBlogs } from '@/interface/blogs'
 interface IBlogProps {
-   data: {
-      _id: string
-      slug: string
-      title: string
-      image: string
-      descrition: string
-   }[]
+   blogData: IBlogs[]
 }
 
-const BlogSection = ({ data }: IBlogProps) => {
+const BlogSection = ({ blogData }: IBlogProps) => {
+   const { data, error, isPending } = useQuery({
+      queryKey: [`blog`, blogData],
+      queryFn: () => fetchBlogs(),
+      initialData: blogData
+   })
 
-   return (
-      <section className='space-y-10'>
-         <h2 className='h2-bold'>As notícias mais recentes da Gamestore Blog </h2>
-         <div className='grid grid-cols-12 gap-5'>
-            {data.map((post) => (
-               <BlogPostCard
-                  key={post._id}
-                  title={post.title}
-                  descrition={post.descrition}
-                  image={post.image}
-                  slug={post.slug}
-               />
-            ))}
-         </div>
-      </section>
-   )
+   if (error) {
+      return <p>{error.message}</p>
+   }
+   if (data)
+      return (
+         <section className='space-y-10'>
+            <h2 className='h2-bold'>As notícias mais recentes da Gamestore Blog </h2>
+            <div className='grid grid-cols-12 gap-5'>
+               {data.map((post) => (
+                  <BlogPostCard
+                     key={post._id}
+                     title={post.title}
+                     descrition={post.descrition}
+                     image={post.cover_image}
+                     slug={post.slug}
+                  />
+               ))}
+            </div>
+         </section>
+      )
 }
 
 export default BlogSection
