@@ -1,10 +1,14 @@
 import SubNav from '@/components/shared/SubNav'
 import Follow from '@/components/views/Follow'
 import Footer from '@/components/views/Footer'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
+export const metadata: Metadata = {
+   title: 'Sobre a Loja'
+}
 const page = () => {
    return (
       <>
@@ -19,7 +23,7 @@ const page = () => {
                <div className="flex-between">
                   <div className="w-full md:w-1/2 space-y-6">
                      <h2 className='h2-bold'>Quem somos...</h2>
-                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam culpa obcaecati dolorem necessitatibus, atque recusandae quisquam aspernatur sequi sapiente harum exercitationem dignissimos provident itaque expedita animi eum quo, ipsam voluptate officiis asperiores. Earum aperiam aliquid veniam minus, voluptate distinctio maxime.</p>
+                     <p>O que nos diferencia? É mais do que apenas a nossa extensa coleção de jogos e acessórios. Dedicamo-nos à curadoria de uma gama diversificada de títulos, garantindo que haja algo para todos. Quer você seja um jogador experiente ou esteja apenas começando, estamos aqui para guiá-lo em sua jornada no jogo.</p>
                      <Image src='/cb-p1.jpg' className='rounded-md w-[31rem]' width={900} height={900} alt='x-box contrller' />
 
                   </div>

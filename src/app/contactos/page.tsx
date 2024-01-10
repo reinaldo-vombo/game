@@ -1,5 +1,10 @@
 import SubNav from "@/components/shared/SubNav";
 import ContactSetion from "@/components/views/ContactSetion";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+   title: 'Contactos'
+}
 
 
 export default function Page() {

@@ -1,6 +1,10 @@
 import SubNav from "@/components/shared/SubNav"
 import Footer from "@/components/views/Footer"
+import { Metadata } from "next"
 
+export const metadata: Metadata = {
+   title: 'Políticas de Privacidade'
+}
 
 const page = () => {
    return (
