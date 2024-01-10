@@ -10,9 +10,9 @@ interface IBlogCard {
 
 const BlogPostCard = ({ title, descrition, image, slug }: IBlogCard) => {
    return (
-      <div className='col-span-12 sm:col-span-6 lg:col-span-4 space-y-7'>
+      <div className='col-span-12 sm:col-span-6 lg:col-span-4 space-y-4'>
          <Link href={`blog-post/${slug}`}>
-            <div className='relative h-32'>
+            <div className='relative h-48'>
                <Image src={image} className='object-cover rounded-lg' fill sizes='100%' loading='lazy' alt={title} />
             </div>
          </Link>

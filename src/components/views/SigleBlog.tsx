@@ -1,31 +1,20 @@
 'use client'
-import React, { useEffect, useState } from 'react'
 import SubNav from '../shared/SubNav'
+import { PortableText } from '@portabletext/react'
 import { Icon } from '../../../config/icon'
 import Image from 'next/image'
 import { config } from '../../../config/siteConfig'
 import Link from 'next/link'
 import { Button } from '../ui/button'
 import Comment from '../shared/Comment'
-import { IBlogs } from '@/interface/blogs'
+import { IAllComments, IBlogs } from '@/interface/blogs'
 interface IBlogProps {
    post: IBlogs
+   comments: IAllComments[]
 }
-const SigleBlog = ({ post }: IBlogProps) => {
 
-   const [color, setColor] = useState(false)
-   useEffect(() => {
-      window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
-   });
+const SigleBlog = ({ post, comments }: IBlogProps) => {
 
-   const handleScroll = () => {
-      if (window.scrollY >= 82) {
-         setColor(true);
-      } else {
-         setColor(false);
-      }
-   };
    return (
       <section>
          <div className='h-44 bg-cover bg-center blog-overlay relative' style={{ backgroundImage: 'url(/blog-bg.jpg)' }}>
@@ -67,7 +56,7 @@ const SigleBlog = ({ post }: IBlogProps) => {
                         </div>
                      </div>
                      {/* <h2 className='h1-semibold text-[#2993FA]'>{post.subTitle ? post.subTitle : ''}</h2> */}
-                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi dolor at totam, autem nulla provident ratione asperiores ipsa, eius similique ipsam quaerat necessitatibus neque delectus sint quasi debitis, explicabo voluptatum facere. Ad quasi, itaque minima laboriosam molestias accusamus ipsa nisi?</p>
+                     <PortableText value={post.content} />
                   </div>
                </div>
                <div className='col-span-12 md:col-span-3'>
@@ -87,16 +76,19 @@ const SigleBlog = ({ post }: IBlogProps) => {
          </div>
          <div className='bg-black p-4 mt-6 text-center space-y-5'>
             <h3>Participe da conversa</h3>
-            <Button className='primary'>Comentar</Button>
+            <div>
+               <Link href='#comment' className='primary p-2 rounded-md'>Comentar</Link>
+            </div>
             <h3 className='text-slate-500'>Mas não seja um idiota!</h3>
             <p>Por favor, seja gentil, atencioso e construtivo. Denunciar comentários inadequados para</p>
          </div>
          <div className='p-1 md:p-8 space-y-6'>
             {/* <h2 className='base-medium'>{post.comment}Comentario</h2> */}
-            <Comment />
+            <Comment blogId={post._id} comments={comments} />
          </div>
       </section>
    )
 }
+
 
 export default SigleBlog

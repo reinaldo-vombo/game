@@ -2,7 +2,7 @@ import SigleBlog from "@/components/views/SigleBlog";
 import { IPageParams } from "@/interface/product";
 import { config } from "../../../../config/siteConfig";
 import Skeleton from "@/components/shared/Skeleton";
-import { fetchSigleBlog } from "@/app/action";
+import { fetchSigleBlog, fetchComments } from "@/app/action";
 import { Metadata, ResolvingMetadata } from "next";
 import { IBlogs } from "@/interface/blogs";
 type Props = {
@@ -42,12 +42,17 @@ export async function generateMetadata(
 
 export default async function page({ params }: IPageParams) {
    const post = await fetchSigleBlog(`${params.slug}`)
+   const allComments = await fetchComments(post._id)
+
+
+
    if (!post) {
       return <Skeleton />
    }
    return (
       <>
-         <SigleBlog post={post} />
+         <SigleBlog post={post} comments={allComments} />
+
       </>
    )
 }

@@ -143,12 +143,64 @@ export const fetchSigleBlog = async (slug: string) => {
    const blogs = await client.fetch<IBlogs>(
       `*[_type == "blog" && slug.current == $slug][0]{
       _id,
+      title,
       'cover_image': cover_image.asset->url,
       "slug": slug.current,
       descrition,
       content
    }`, {slug})
    return blogs
+}
+export const postComment = async (e: FormData) => {
+   const user = await getUser()
+
+   const comment = e.get('comment')?.toString()
+   const blogId = e.get('blogId')?.toString()
+
+   
+   if(!comment){
+      return {
+         error: 'Escreva seu comentario'
+      }
+   }
+
+   const newComment = {
+      text: comment,
+      postedBy: {
+        _type: 'reference',
+        _ref: user._id
+      },
+      post: {
+         _type: 'reference',
+         _ref: blogId
+      }
+    };
+   try {
+       await client.create({
+         _type: 'comment',
+         ...newComment
+      })
+      revalidatePath('/blog-post/[slug]', 'page');
+      
+      return {
+         success: true,
+      };
+   } catch (error) {
+      console.error('Error posting feedback:', error);
+      return {
+        error: 'Ocorreu um erro ',
+      };
+    }
+}
+export const fetchComments = async (postId: string) => {
+   const postComment = await client.fetch(`
+   *[_type == "comment" && post._ref == $postId]{
+      _id,
+      text,
+      postedBy->{name, image}
+    }`,{postId}
+   )
+   return postComment
 }
 export const postFeedbak = async (e: FormData) => {
    const user = await getUser()

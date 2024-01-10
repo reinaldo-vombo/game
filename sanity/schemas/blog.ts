@@ -60,11 +60,11 @@ export const blogs = defineType({
         }
       ]
     },
-    {
-      name: "comments",
-      title: "Comentarios",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "comment" }] }],
-    },
+    // {
+    //   name: "comments",
+    //   title: "Comentarios",
+    //   type: "array",
+    //   of: [{ type: "reference", to: [{ type: "comment" }] }],
+    // },
   ],
 })

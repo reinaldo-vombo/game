@@ -7,7 +7,7 @@ export const comment = defineType({
   fields: [
     {
       name: "text",
-      title: "Text",
+      title: "commentario",
       type: "text",
     },
     {
@@ -16,5 +16,10 @@ export const comment = defineType({
       type: 'reference',
       to: [{ type: 'user' }],
     },
+    {
+      name: 'post',
+      type: 'reference',
+      to: [{type: 'blog'}]
+    }
   ],
 });
