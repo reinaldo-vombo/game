@@ -9,30 +9,20 @@ interface IPageProvider {
 }
 interface IProvider {
    handleShowCart: () => void
-   handleShowVideo: () => void
    handleShowSidebar: () => void
    handleShowGallery: () => void
    addToCart: (item: CartItem) => void
    removeFromCart: (itemId: string) => void;
    increaseQuantity: (itemId: string) => void
    decreaseQuantity: (itemId: string) => void
-   handleShowSeacheInput: (itemId: string) => void
-   user: IUser | null
    showCart: boolean
    total: number
    totalQuantity: number
    cart: CartItem[]
-   showVideo: boolean
-   showSearchInput: boolean
    showSidebar: boolean
    showModalGallery: boolean
-   isMutted: boolean
-   setIsMutted: React.Dispatch<React.SetStateAction<boolean>>
-   hideInfo: boolean
-   setHideInfo: React.Dispatch<React.SetStateAction<boolean>>
+
 }
-
-
 export const MainContext = createContext<IProvider | undefined>(undefined)
 
 export const useProvider = (): IProvider => {
@@ -47,38 +37,13 @@ export const useProvider = (): IProvider => {
 export function PageProvider({ children }: IPageProvider) {
    //states
    const [showCart, setShowCart] = useState(false)
-   const [showVideo, setShowVideo] = useState(false)
    const [showSidebar, setShowSidebar] = useState(false)
-   const [isMutted, setIsMutted] = useState(true)
-   const [hideInfo, setHideInfo] = useState(false)
-   const [showSearchInput, setShowSearchInput] = useState(false)
    const [showModalGallery, setShowModalGallery] = useState(false)
    const [cart, setCart] = useState<CartItem[]>([]);
-   const [user, setUser] = useState<IUser | null>(null);
-
-
-   useEffect(() => {
-      const getUserData = async () => {
-         try {
-            const user = await currentUser();
-            setUser(user);
-         } catch (error) {
-            console.error('Error fetching user data:', error);
-         }
-      };
-
-      getUserData();
-   }, []);
 
    //fuctions
    const handleShowCart = () => {
       setShowCart(!showCart)
-   }
-   const handleShowSeacheInput = () => {
-      setShowSearchInput(!showSearchInput)
-   }
-   const handleShowVideo = () => {
-      setShowVideo(!showVideo)
    }
    const handleShowSidebar = () => {
       setShowSidebar(!showSidebar)
@@ -87,11 +52,11 @@ export function PageProvider({ children }: IPageProvider) {
       setShowModalGallery(!showModalGallery)
    }
    const addToCart = (item: CartItem) => {
-      const itemInCart = cart.find((cartItem) => cartItem._id === item._id);
+      const itemInCart = cart.find((cartItem) => cartItem.postId === item.postId);
       if (itemInCart) {
          setCart((prevCart) =>
             prevCart.map((cartItem) =>
-               cartItem._id === item._id
+               cartItem.postId === item.postId
                   ? { ...cartItem, quantity: cartItem.quantity + 1 }
                   : cartItem
             )
@@ -102,13 +67,13 @@ export function PageProvider({ children }: IPageProvider) {
       }
    };
    const removeFromCart = (itemId: string) => {
-      setCart((prevCart) => prevCart.filter((item) => item._id !== itemId));
+      setCart((prevCart) => prevCart.filter((item) => item.postId !== itemId));
    };
 
    const increaseQuantity = (itemId: string) => {
       setCart((prevCart) =>
          prevCart.map((item) =>
-            item._id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+            item.postId === itemId ? { ...item, quantity: item.quantity + 1 } : item
          )
       );
    };
@@ -116,7 +81,7 @@ export function PageProvider({ children }: IPageProvider) {
    const decreaseQuantity = (itemId: string) => {
       setCart((prevCart) =>
          prevCart.map((item) =>
-            item._id === itemId
+            item.postId === itemId
                ? { ...item, quantity: Math.max(item.quantity - 1, 0) }
                : item
          )
@@ -129,27 +94,18 @@ export function PageProvider({ children }: IPageProvider) {
 
    const value = {
       handleShowCart,
-      handleShowVideo,
       handleShowSidebar,
       handleShowGallery,
       decreaseQuantity,
       showModalGallery,
-      handleShowSeacheInput,
       removeFromCart,
       increaseQuantity,
-      showSearchInput,
-      setIsMutted,
-      setHideInfo,
       totalQuantity,
       showSidebar,
-      showVideo,
       addToCart,
-      isMutted,
-      hideInfo,
       showCart,
       total,
       cart,
-      user
    }
    return (
       <MainContext.Provider value={value}>

@@ -3,6 +3,7 @@ import { useProvider } from '@/context/Provider'
 import Image from 'next/image'
 import Link from 'next/link'
 import Dwonload from './Dwonload'
+import NewLance from '../NewLance'
 
 const SideBar = () => {
    const { showSidebar } = useProvider()
@@ -48,6 +49,7 @@ const SideBar = () => {
                      </a>
                   </li>
                </ul>
+               <NewLance />
                <Dwonload />
             </div>
          </aside>

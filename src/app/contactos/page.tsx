@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function Page() {
    return (
       <section>
-         <SubNav />
+         <SubNav showLinks={true} />
          <div className='p-40 bg-cover bg-center overlay relative' style={{ backgroundImage: 'url(/about.jpg)' }}>
             <div className='relative'>
                <div className='text-center'>Contacto</div>

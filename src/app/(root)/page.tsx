@@ -1,13 +1,11 @@
 import BlogSection from "@/components/views/BlogSection";
 import Hero from "@/components/views/Hero";
 import NewProducts from "@/components/views/NewProducts";
-import { config } from "../../../config/siteConfig";
 import Follow from "@/components/views/Follow";
 import { fetchBlogs } from "../action";
 
 export default async function Home() {
   const blogs = await fetchBlogs()
-
 
   return (
     <>

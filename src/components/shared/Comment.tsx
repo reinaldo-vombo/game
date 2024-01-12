@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import { toast } from "sonner"
 import {
@@ -14,16 +15,17 @@ import { postComment } from '@/app/action'
 import { revalidatePath } from 'next/cache'
 import { IAllComments } from '@/interface/blogs'
 import { useProvider } from '@/context/Provider'
+import { IUser } from '@/interface/user'
 interface IComment {
    comments: IAllComments[]
    blogId: string
+   user: IUser
 }
 interface IPoster {
    name: string
    reply: string
 }
-const Comment = ({ blogId, comments }: IComment) => {
-   const { user } = useProvider()
+const Comment = ({ blogId, comments, user }: IComment) => {
 
 
    async function hanleReply(formData: FormData) {
@@ -38,9 +40,13 @@ const Comment = ({ blogId, comments }: IComment) => {
 
    return (
       <div>
-         {comments.map((item) => (
-            <UserComment name={item.postedBy.name} reply={item.text} key={item._id} />
-         ))}
+         {comments.length === 0 ? (
+            <p>Nenhum comentário ainda. Seja o primeiro a comentar!</p>
+         ) : (
+            comments.map((item) => (
+               <UserComment name={item.postedBy.name} reply={item.text} key={item._id} />
+            ))
+         )}
          {/* <div className="ml-12 mt-4 space-y-2">
             <UserComment />
          </div> */}
@@ -48,7 +54,7 @@ const Comment = ({ blogId, comments }: IComment) => {
             <form action={hanleReply}>
                <div className="flex space-x-4">
                   <div className="flex-shrink-0">
-                     <Image src={user ? user.image : ''} width={400} height={400} alt="User Avatar" className="w-8 h-8 rounded-full" />
+                     <Image src={user ? user.avatar : ''} width={400} height={400} alt="User Avatar" className="w-8 h-8 rounded-full" />
                   </div>
                   <div className="flex-1 relative">
                      <Textarea name='comment' id='comment' className='bg-slate-600 border-none focus-visible:ring-offset-0 focus-visible:ring-0' placeholder="Type your message here." />

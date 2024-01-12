@@ -6,6 +6,7 @@ import ProductSlider from '../shared/ProductSlider'
 const Hero = async () => {
    const Newproducts = await fetchProducts('jogo')
    const Acessóriosproducts = await fetchProducts('Acessórios PS5')
+
    return (
       <section>
          <Slider />

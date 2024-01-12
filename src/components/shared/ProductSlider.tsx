@@ -31,7 +31,7 @@ const ProductSlider = ({ product, showArrows, category }: ISliderData) => {
                         <Card className='border-none'>
                            <CardContent className="flex aspect-square items-center justify-center p-6">
                               <GameCard
-                                 _id={item._id}
+                                 postId={item._id}
                                  image={item.image}
                                  title={item.title}
                                  slug={item.slug}

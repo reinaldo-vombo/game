@@ -27,8 +27,14 @@ export const register = async (e: FormData) => {
    
    if (!name || !email || !password) {
       return {
-         error: 'Incomplete form data',
+         error: 'Preacha todos os campos',
        };
+   }
+   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   if (!emailRegex.test(email)) {
+      return {
+         error: 'Endereço de email invalido',
+      };
    }
 
    try {
@@ -66,6 +72,7 @@ export const lognin = async (e: FormData) => {
          error: 'Prencha todos os campos',
        };
    }
+   
    try {
       const result = await client.fetch(
          `*[_type == 'user' && email == $email && password == $password  ][0]{
@@ -81,7 +88,7 @@ export const lognin = async (e: FormData) => {
        );
        if (!result) {
          return {
-           error: 'Invalid email or password',
+           error: 'E-mail ou senha inválida',
          };
        }
 
@@ -99,7 +106,7 @@ export const lognin = async (e: FormData) => {
            _id,
            name,
            email,
-           'image' : image.asset->url
+           'avatar' : avatar.asset->url
            // Add other necessary fields
          }`,
          {
@@ -125,13 +132,53 @@ export const lognin = async (e: FormData) => {
    }
 
 }
-export const logout = async () => {
-   cookies().delete('player')
+export const addToFavorites = async (postId: string) => {
+   const user = await getUser()
+   const userId = user._id
+   // Check if the post is already in the user's favorites
+   const existingLike = await client.fetch(
+      `*[_type == "likes" && likedBy._ref == $userId && post._ref == $postId]`,
+      { userId, postId }
+   );
+
+   if (existingLike.length === 0) {
+      // If not in favorites, add it
+      await client.create({
+         _type: 'likes',
+         likedBy: {
+            _type: 'reference',
+            _ref: userId,
+         },
+         post: {
+            _type: 'reference',
+            _ref: postId,
+         },
+      });
+      revalidatePath('/')
+      return { success: true };
+   } else {
+      // Post is already in favorites
+      return { success: false, error: 'Post is already in favorites.' };
+   }
+};
+export const isPostLiked = async (userId: string, postId: string) => {
+   try {
+      const result = await client.fetch(`
+         *[_type == "likes" && likedBy._ref == $userId && post._ref == $postId] | count`,
+         { userId, postId }
+      );
+      
+      return result > 0; // If count is greater than 0, the post is liked
+   } catch (error) {
+      console.error('Error checking if post is liked:', error);
+      return false; // Assume post is not liked in case of an error
+   }
 }
 export const fetchBlogs = async () => {
    const blogs = await client.fetch<IBlogs[]>(
       `*[_type == "blog"]{
       _id,
+      title,
       'cover_image': cover_image.asset->url,
       "slug": slug.current,
       descrition,
@@ -163,6 +210,11 @@ export const postComment = async (e: FormData) => {
          error: 'Escreva seu comentario'
       }
    }
+   if(! user){
+      return {
+         error: 'Tem que fazer o lognin para poder comentar'
+      }
+   }
 
    const newComment = {
       text: comment,
@@ -180,7 +232,7 @@ export const postComment = async (e: FormData) => {
          _type: 'comment',
          ...newComment
       })
-      revalidatePath('/blog-post/[slug]', 'page');
+      // revalidatePath('/blog-post/[slug]', 'page');
       
       return {
          success: true,
@@ -213,6 +265,11 @@ export const postFeedbak = async (e: FormData) => {
       return {
       error: 'Por-favor prencha todos os campos',
       };
+   }
+   if (!user) {
+      return {
+         error: 'Faça lognin para poder continuar'
+      }
    }
    
  const postId = uuid();
@@ -327,6 +384,11 @@ export const singleProduct = async (slug: string) => {
          category[]->{
             title
          },
+         capas[]->{
+            name,
+            'image': image.asset->url,
+            price
+          },
          'image' : image.asset->url,
          'poster' : poster.asset->url,
          playes,

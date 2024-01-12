@@ -5,6 +5,7 @@ export const metadata: Metadata = {
    title: 'As melhores categorias'
 }
 export default function Page() {
+
    return (
       <>
          <Categories />

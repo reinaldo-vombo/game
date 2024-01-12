@@ -1,7 +1,7 @@
 import SigleBlog from "@/components/views/SigleBlog";
 import { IPageParams } from "@/interface/product";
 import Skeleton from "@/components/shared/Skeleton";
-import { fetchSigleBlog, fetchComments } from "@/app/action";
+import { fetchSigleBlog, fetchComments, fetchBlogs } from "@/app/action";
 import { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
@@ -41,14 +41,14 @@ export async function generateMetadata(
 
 export default async function page({ params }: IPageParams) {
    const post = await fetchSigleBlog(`${params.slug}`)
-   const allComments = await fetchComments(post._id)
+   const allPost = await fetchBlogs()
 
    if (!post) {
       return <Skeleton />
    }
    return (
       <>
-         <SigleBlog post={post} comments={allComments} />
+         <SigleBlog post={post} allPost={allPost} />
 
       </>
    )

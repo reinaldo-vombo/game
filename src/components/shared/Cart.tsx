@@ -39,12 +39,12 @@ const Cart = () => {
                               <h2 className='h3-bold'>{item.title}</h2>
                               <Counter
                                  quantity={item.quantity}
-                                 decreaseQuantity={() => handleDecreaseQuantity(item._id)}
-                                 increaseQuantity={() => handleIncreaseQuantity(item._id)}
+                                 decreaseQuantity={() => handleDecreaseQuantity(item.postId)}
+                                 increaseQuantity={() => handleIncreaseQuantity(item.postId)}
                               />
                               <b className='text-2xl'>{item.price * item.quantity}(kz)</b>
                            </div>
-                           <Button aria-label="close icon button" className='absolute p-0 top-0 right-0 z-20 bg-black w-12 h-12 rounded-full flex-center' onClick={() => handleRemoveFromCart(item._id)}>
+                           <Button aria-label="close icon button" className='absolute p-0 top-0 right-0 z-20 bg-black w-12 h-12 rounded-full flex-center' onClick={() => handleRemoveFromCart(item.postId)}>
                               <Icon.close width={30} />
                            </Button>
                         </li>

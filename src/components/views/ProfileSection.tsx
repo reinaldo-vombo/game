@@ -12,13 +12,14 @@ import { ReactNode } from "react"
 import FileUploader from "../shared/FileUploader"
 import { useProvider } from "@/context/Provider"
 import Skeleton from "../shared/Skeleton"
+import { IUser } from "@/interface/user"
 interface IEditor {
    children: ReactNode
    className: string
 }
 
-const ProfileSection = () => {
-   const { user } = useProvider()
+const ProfileSection = ({ user }: { user: IUser }) => {
+
    if (!user) {
       return <Skeleton />
    }
@@ -26,7 +27,7 @@ const ProfileSection = () => {
       <>
          <div className="h-64 relative rounded-md bg-cover bg-center flex" style={{ backgroundImage: `url(/category-banner.webp)` }}>
             <div className="absolute bottom-[-46px] left-9 flex items-center gap-4">
-               <Image src={user.image} className="w-32 h-32 rounded-full border border-black" width={400} height={400} alt={user.name} />
+               <Image src={user.avatar ? user.avatar : '/ps.webp'} className="w-32 h-32 rounded-full border border-black" width={400} height={400} alt={user.name} />
                <b>{user.name}</b>
                <EditPhoto className="absolute right-[142px] top-[91px]">
                   <FileUploader />

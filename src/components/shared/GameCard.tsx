@@ -1,18 +1,42 @@
+
 import Image from 'next/image'
 import { toast } from "sonner"
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ByButton from './Button'
 import { IGameCard } from '@/interface/product'
 import { useProvider } from '@/context/Provider'
 import { Button } from '../ui/button'
 import { formatNumber } from '../../../config/siteConfig'
+import { addToFavorites, isPostLiked } from '@/app/action'
 
-const GameCard = ({ title, discount, image, price, slug, _id }: IGameCard) => {
+const GameCard = ({ title, discount, image, price, slug, postId }: IGameCard) => {
    const { addToCart } = useProvider()
+   // const userId = user ? user._id : ''
+
+   const [isLiked, setIsLiked] = useState(false);
+   // useEffect(() => {
+   //    // Check if the post is liked when the component mounts
+
+   //    const checkLikedStatus = async () => {
+   //       const liked = await isPostLiked(userId, postId);
+   //       setIsLiked(liked);
+   //    };
+
+   //    checkLikedStatus();
+   // }, [userId, postId]);
+
+   async function handleAddToFavorites() {
+      const result = await addToFavorites(postId); // Pass the user and post IDs
+      if (result.success) {
+         toast('Added to favorites!');
+      } else {
+         toast(result.error);
+      }
+   }
    const handleAddToCart = () => {
       const itemToAdd = {
-         _id,
+         postId,
          title,
          image,
          price,
@@ -21,14 +45,13 @@ const GameCard = ({ title, discount, image, price, slug, _id }: IGameCard) => {
       toast(`${title} adicionado ao carrinho`)
       addToCart(itemToAdd);
    };
-
    return (
       <div className='space-y-7'>
          <div className='h-40 relative'>
             <Link href={`/product/${slug}`}>
                <Image src={image} className='w-full h-full rounded-md object-cover' width={600} height={600} alt='game image' />
             </Link>
-            <Button className='absolute p-0 top-0 right-0 w-6 h-6' aria-label='heart icon button'>
+            <Button className='absolute p-0 top-0 right-0 w-6 h-6' onClick={handleAddToFavorites} aria-label='heart icon button'>
                <Image src='/icons/with-heart.gif' className='w-full h-full' width={24} height={24} alt='icon' />
             </Button>
          </div>
@@ -40,7 +63,7 @@ const GameCard = ({ title, discount, image, price, slug, _id }: IGameCard) => {
             </div>
             <div className='flex items-center justify-between gap-4'>
                <ByButton>Comprar</ByButton>
-               <Button type='button' className='w-8' onClick={handleAddToCart} aria-label='cart bag'>
+               <Button type='button' className='w-8 p-0' onClick={handleAddToCart} aria-label='cart bag'>
                   <Image src='/shopping.gif' width={30} height={30} alt='icon' />
                </Button>
             </div>

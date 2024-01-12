@@ -16,7 +16,7 @@ const CreditCard = ({ isFlipped, selectedBank, cardNumber, info, paymentType }: 
                      <div className="flex-start w-full">
                         <Image src='/chip.png' className="w-12" width={400} height={400} alt="logotipo" />
                      </div>
-                     <div className="card-number w-full text-2xl text-center">{cardNumber ? cardNumber : '1234 5678 9012 3456'}</div>
+                     <div className="card-number w-full text-2xl text-center">{cardNumber ? cardNumber : '#### #### #### ####'}</div>
                      <div className="card-holder w-full flex-between">
                         <span>{info.cardOwner || 'Joe Doe'}</span>
                         <span>12/23</span>

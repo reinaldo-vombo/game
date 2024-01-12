@@ -27,7 +27,7 @@ export default defineType({
       readOnly: true, 
     }),
     defineField({
-      name: 'image',
+      name: 'avatar',
       title: 'Avatar',
       type: 'image',
       options: {

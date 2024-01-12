@@ -124,7 +124,6 @@ const Payment = () => {
                               ))}
                            </SelectContent>
                         </Select>
-
                      </div>
 
                      <div className="relative">
@@ -144,32 +143,30 @@ const Payment = () => {
                      <div className='grid grid-cols-1 gap-4 sm:grid-cols-12'>
                         <div className='col-span-4'>
                            <div className="relative">
-                              <span className="absolute start-0 bottom-3 text-gray-200 dark:text-gray-400">
-                                 <Icon.calendarDay width={20} />
-                              </span>
-                              <input
-                                 type="number"
-                                 onChange={handleInputChange}
-                                 value={cardInfo.month}
-                                 name='month'
-                                 id="floating-phone-number"
-                                 className="block py-2.5 ps-6 pe-0 w-full text-sm text-gray-200 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder=" " />
-                              <label htmlFor="floating-phone-number" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:start-6 peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Phone number</label>
+                              <Select onValueChange={handleBankChange}>
+                                 <SelectTrigger className="w-full border-0 border-b-2 border-gray-200">
+                                    <SelectValue placeholder="Mês" />
+                                 </SelectTrigger>
+                                 <SelectContent className='bg-black border-slate-700'>
+                                    {config.YEARS.map((item, i) => (
+                                       <SelectItem value={item} key={i}>{item}</SelectItem>
+                                    ))}
+                                 </SelectContent>
+                              </Select>
                            </div>
                         </div>
                         <div className='col-span-4'>
                            <div className="relative">
-                              <span className="absolute start-0 bottom-3 text-gray-200 dark:text-gray-400">
-                                 <Icon.calendarDay width={20} />
-                              </span>
-                              <input
-                                 type="number"
-                                 onChange={handleInputChange}
-                                 value={cardInfo.year}
-                                 name='year'
-                                 id="floating-phone-number"
-                                 className="block py-2.5 ps-6 pe-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder=" " />
-                              <label htmlFor="floating-phone-number" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-placeholder-shown:start-6 peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Phone number</label>
+                              <Select onValueChange={handleBankChange}>
+                                 <SelectTrigger className="w-full border-0 border-b-2 border-gray-200">
+                                    <SelectValue placeholder="Ano" />
+                                 </SelectTrigger>
+                                 <SelectContent className='bg-black border-slate-700'>
+                                    {config.MONTH.map((item, i) => (
+                                       <SelectItem value={item} key={i}>{item}</SelectItem>
+                                    ))}
+                                 </SelectContent>
+                              </Select>
                            </div>
                         </div>
                         <div className='col-span-4' onMouseEnter={handleFlip}

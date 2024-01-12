@@ -14,10 +14,11 @@ const BlogSection = ({ blogData }: IBlogProps) => {
       initialData: blogData
    })
 
+
    if (error) {
       return <p>{error.message}</p>
    }
-   if (data)
+   if (data) {
       return (
          <section className='space-y-10'>
             <h2 className='h2-bold'>As notícias mais recentes da Gamestore Blog </h2>
@@ -34,6 +35,14 @@ const BlogSection = ({ blogData }: IBlogProps) => {
             </div>
          </section>
       )
+
+   }
+   if (isPending) {
+      return <p>Loading...</p>; // You might want to show a loading indicator
+   }
+
+   // Handle the case when there is no error, data, or pending state
+   return null;
 }
 
 export default BlogSection

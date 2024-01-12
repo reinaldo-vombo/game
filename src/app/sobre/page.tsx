@@ -13,7 +13,7 @@ const page = () => {
    return (
       <>
          <section>
-            <SubNav />
+            <SubNav showLinks={true} />
             <div className='p-40 bg-cover bg-center overlay relative' style={{ backgroundImage: 'url(/about.jpg)' }}>
                <div className='relative'>
                   <div className='text-center'>Sobre Gamestore</div>

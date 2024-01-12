@@ -133,8 +133,13 @@ export const games = defineType({
     },
     {
       name: 'capas',
-      type: 'reference',
-      to: [{ type: 'skins' }]
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'skins' }] }]
     },
+    {
+      title: 'Está em esibição',
+      name: 'banner',
+      type: 'boolean'
+    }
   ],
 })

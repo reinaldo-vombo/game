@@ -1,11 +1,10 @@
 'use client'
-
 import { useProvider } from "@/context/Provider"
 import Image from "next/image"
 import TabButton from "./TabNutton"
 import Button from "./Button"
 import { ISgleGameItem } from "@/interface/product"
-import { config, formatNumber } from "../../../config/siteConfig"
+import { calculateTotalPrice, formatNumber } from "../../../config/siteConfig"
 import ModalDialog from "./ModalDialog"
 import AccessoriesInfo from "./AccessoriesInfo"
 import { useState } from "react"
@@ -21,8 +20,21 @@ const ProductInfo = ({ product, relatedproducts, category }: ISgleGameItem) => {
       queryFn: () => singleProduct(`${product.slug}`),
       initialData: product
    })
-   const { isMutted, setIsMutted, setHideInfo, hideInfo, } = useProvider()
-   const [custumizedSettings, setCustumizedSettings] = useState(false)
+
+   const [isMutted, setIsMutted] = useState(true)
+   const [hideInfo, setHideInfo] = useState(false)
+   const [skinPrice, setSkinPrice] = useState(Number)
+   const [isLoading, setIsLoading] = useState(true);
+
+
+   const handleLoadStart = () => {
+      setIsLoading(true);
+   };
+
+   const handleLoadedData = () => {
+      setIsLoading(false);
+   };
+   const totalWithNewQuantity = calculateTotalPrice(data.price, skinPrice)
 
    if (error) return <p>Ocorreu um erro</p>
 
@@ -33,32 +45,50 @@ const ProductInfo = ({ product, relatedproducts, category }: ISgleGameItem) => {
       return (
          <>
             <div className='relative overflow-hidden'>
-               <video loop={true} autoPlay={true} poster={data.cover_image} controls={false} muted={isMutted} className="absolute min-w-full rounded-lg hidden sm:block">
+               <video
+                  loop={true}
+                  autoPlay={true}
+                  poster={data.cover_image}
+                  controls={false}
+                  muted={isMutted}
+                  onLoadStart={handleLoadStart}
+                  onLoadedData={handleLoadedData}
+                  className="absolute min-w-full rounded-lg hidden sm:block">
                   <source src={data.video_file} />
                </video>
-               <div className='hidden sm:flex-between absolute top-[38px] right-0  gap-3 z-20'>
-                  <button type='button' onClick={() => setIsMutted(prev => !prev)}>
-                     <Image src='/song.gif' className='w-[1.5rem] h-auto' width={50} height={50} alt='sond icon' />
-                  </button>
-                  <button type='button' onClick={() => setHideInfo(prev => !prev)}>
-                     <Image src='/view.gif' className='w-[1.5rem] h-auto' width={50} height={50} alt='sond icon' />
-                  </button>
+               <div className='hidden sm:flex-between absolute top-[38px] right-0  gap-3 z-20 pr-4'>
+                  {isLoading ? (
+                     <Image src='/spinner.gif' className="w-8 h-8" width={30} height={30} alt="loading icon" />
+                  ) : (
+                     <>
+                        <button type='button' onClick={() => setIsMutted(prev => !prev)}>
+                           <Image src='/song.gif' className='w-[50px] h-[50px]' width={50} height={50} alt='sond icon' />
+                        </button>
+                        <button type='button' onClick={() => setHideInfo(prev => !prev)}>
+                           <Image src='/view.gif' className='w-[50px] h-[50px]' width={50} height={50} alt='sond icon' />
+                        </button>
+                     </>
+                  )}
                </div>
                <div className={`absolute inset-0 bg-gradient-to-r from-black to-transparent ${hideInfo ? '-translate-x-[86rem]' : 'translate-x-0'}`} />
                <div className={`absolute inset-0 bg-gradient-to-t from-black from-10% to-transparent to-20% ${hideInfo ? '-translate-x-[86rem]' : 'translate-x-0'}`} />
                <div className={`flex flex-col items-center justify-start relative z-10 md:p-10 gap-4 transition-transform md:flex-row ${hideInfo ? '-translate-x-[86rem]' : 'translate-x-0'}`}>
-                  <div className='relative'>
-                     <Image src={data.poster} className='object-cover rounded-md h-[29rem] w-[18rem]' width={400} height={400} alt={data.title} />
-                     <ModalDialog
-                        className="object-cover rounded-md h-[5rem] w-[5rem] sm:hidden m-auto absolute inset-0 flex-center"
-                        image={<Image src='/play.gif' width={400} height={400} alt={data.title} />}
-                     >
-                        <video autoPlay={true} loop={false} controls={true} className='w-full h-full'>
-                           <source src={data.video_file} />
-                        </video>
-                     </ModalDialog>
-                  </div>
-                  {/* <AccessoriesInfo /> */}
+                  {data.type === 'game' && (
+                     <div className='relative'>
+                        <Image src={data.poster} className='object-cover rounded-md h-[29rem] w-[18rem]' width={400} height={400} alt={data.title} />
+                        <ModalDialog
+                           className="object-cover rounded-md h-[5rem] w-[5rem] sm:hidden m-auto absolute inset-0 flex-center"
+                           image={<Image src='/play.gif' className="w-[400px] h-[400px]" width={400} height={400} alt={data.title} />}
+                        >
+                           <video autoPlay={true} loop={false} controls={true} className='w-full h-full'>
+                              <source src={data.video_file} />
+                           </video>
+                        </ModalDialog>
+                     </div>
+                  )}
+                  {data.capas && (
+                     <AccessoriesInfo images={data.capas} posterImage={data.poster} setSkinPrice={setSkinPrice} />
+                  )}
                   <div className='space-y-5 text-center md:text-left px-3'>
                      <h2 className='h1-semibold'>{data.title}</h2>
                      <p>{data.cumpuny}</p>
@@ -66,11 +96,17 @@ const ProductInfo = ({ product, relatedproducts, category }: ISgleGameItem) => {
                         <p>Disponível para</p>
                         {data.avalible?.map((item, i) => (
                            <span key={i}>
-                              <Image src={item} className='md:w-auto md:h-auto' width={60} height={60} alt='platform' />
+                              <Image src={item} className='md:w-[60px] md:h-[60px]' width={60} height={60} alt='platform' />
                            </span>
                         ))}
                      </div>
-                     <h3 className='h3-bold'>{formatNumber(data.price)}(kz)</h3>
+                     <div>
+                        <h3 className={skinPrice > 0 ? 'base-semibold text-gray-500' : ' h3-bold'}>{formatNumber(data.price)}(kz)</h3>
+                        {skinPrice !== 0 && (
+                           <h3 className="text-green-400 h3-bold">{formatNumber(totalWithNewQuantity)}(kz)</h3>
+                        )}
+                     </div>
+
                      <div className="flex items-center justify-center sm:justify-start gap-6">
                         {data.payment.map((item, i) => (
                            <Image src={item} width={30} height={30} alt="payment icon" key={i} />
@@ -79,7 +115,7 @@ const ProductInfo = ({ product, relatedproducts, category }: ISgleGameItem) => {
                      {data.psn && (
                         <span className='flex items-center justify-center sm:justify-start gap-3'>
                            <span>
-                              <Image src='/psn-.png' width={30} height={30} alt='pns' />
+                              <Image src='/psn-.png' className="w-[30] h-[30]" width={30} height={30} alt='pns' />
                            </span>
                            <span className='text-[#fcc71d] w-[20rem]'>{data.psn}</span>
                         </span>

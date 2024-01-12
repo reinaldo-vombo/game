@@ -18,35 +18,24 @@ import {
 } from "@/components/ui/tabs"
 import { lognin, register } from "@/app/action"
 import { useCookies } from 'next-client-cookies';
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Icon } from "../../../config/icon"
+import SubmitButton from "../shared/form/SubmitButton"
+
 
 
 const Register = () => {
+   const ref = useRef<HTMLFormElement>(null)
    const [isLoading, setIsLoading] = useState(false)
    const cookies = useCookies();
 
-   // function isValidEmail(email: string | null) {
-   //    if (!email) {
-   //       return false; // Return false for null or undefined
-   //    }
-   //    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-   //    return emailRegex.test(email);
-   // }
    async function RegisterAction(formData: FormData) {
-
-      // if (!isValidEmail(email)) {
-      //    setIsLoading(false);
-      //    toast('Por favor, insira um endereço de e-mail válido');
-      //    return;
-      // }
-
       setIsLoading(true)
       const result = await register(formData)
       if (result?.error) {
 
          setIsLoading(false)
-         toast('Ocorreu um erro, por-favor tente de novo')
+         toast(result?.error)
       } else {
          toast('Bem vindo jogador')
          setIsLoading(false)
@@ -58,13 +47,13 @@ const Register = () => {
       if (result?.error) {
 
          setIsLoading(false)
-         toast('Ocorreu um erro, por-favor tente de novo')
+         toast(result?.error)
+         ref.current?.reset()
       } else {
          toast('Bem vindo de volta jogador')
+         ref.current?.reset()
          setIsLoading(false)
-         cookies.set('user', result.user)
-         console.log(result.user);
-
+         // cookies.set('user', result.user)
       }
 
    }
@@ -82,7 +71,7 @@ const Register = () => {
                      Make changes to your account here. Click save when youre done.
                   </CardDescription>
                </CardHeader>
-               <form action={LogninAction}>
+               <form action={LogninAction} ref={ref}>
                   <CardContent className="space-y-2">
                      <div className="space-y-1">
                         <label htmlFor="email">Email</label>
@@ -94,7 +83,7 @@ const Register = () => {
                      </div>
                   </CardContent>
                   <CardFooter>
-                     <Button type="submit" className="w-full primary">Entar</Button>
+                     <SubmitButton />
                   </CardFooter>
                </form>
             </Card>
@@ -107,7 +96,7 @@ const Register = () => {
                      Change your password here. After saving, youll be logged out.
                   </CardDescription>
                </CardHeader>
-               <form action={RegisterAction}>
+               <form action={RegisterAction} ref={ref}>
                   <CardContent className="space-y-2">
                      <div className="space-y-1">
                         <label htmlFor="current">Nome</label>
@@ -123,9 +112,7 @@ const Register = () => {
                      </div>
                   </CardContent>
                   <CardFooter>
-                     <Button type="submit" className="w-full primary flex justify-center disabled:bg-indigo-600" disabled={isLoading}>
-                        {isLoading ? <Icon.loader className="ani" width={20} /> : 'Cadastra-se'}
-                     </Button>
+                     <SubmitButton />
                   </CardFooter>
                </form>
             </Card>

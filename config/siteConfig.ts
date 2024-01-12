@@ -21,6 +21,16 @@ export function formatNumber(number: number) {
    const formattedNumber = `${formattedIntegerPart}${formattedDecimalPart}`;
    return formattedNumber;
  }
+ export const calculateTotalPrice = (unitPrice: number, quantity: number): number => {
+   if (typeof unitPrice !== 'number' || typeof quantity !== 'number' || quantity < 0 || unitPrice < 0) {
+     throw new Error('Invalid input. Unit price and quantity must be non-negative numbers.');
+   }
+ 
+   // Calculate the total price
+   const totalPrice = unitPrice * quantity;
+ 
+   return totalPrice;
+ };
 
 export const config = {
    NAVA_LINK: [
@@ -268,39 +278,13 @@ export const config = {
          info: []
       },
    ],
-   ACESSORY: [
-      {
-         _id: '12335856634604',
-         payment: ['/mastercard.svg','/visa.svg','/multicaixa.png'],
-         video_url: [],
-         title: 'PlayStation 5 (Slim) Disc Console',
-         category: ['Acessórios', ],
-         desc: '',
-         image: '/ps5-console-featured.webp',
-         poster: '/ps5.jpg',
-         playes: 1,
-         cumpuny: 'Sony Interactive Entertainment',
-         online: true,
-         avalible: [],
-         violance: [],
-         psn: '',
-         cover_image: '/PS4',
-         alt_cover: '',
-         video_file: '/god-of-war-v.mp4',
-         price: 799,
-         discount: 30,
-         color: '',
-         slug: 'playstation-5-slim-disc-console',
-         images: [],
-         info: []
-      },
-   ],
+
    CATEGORIES: [
-      {name: 'PS3', image: '/ps3-bg.jpg', color: '#3c2edd', items: ['New games', 'Acessórios', '']},
-      {name: 'PS4', image: '/ps4-bg.jpg', color: '#3c2edd', items: ['New games', 'Acessórios', '']},
-      {name: 'PS5', image: '/ps5-bg.jpg', color: '#3c2edd', items: ['New games', 'Acessórios', '']},
-      {name: 'XBOX', image: '/xbox-bg.png', color: 'green', items: ['New games', 'Acessórios', '']},
-      {name: 'PC', image: '/pc-bg.jpg', color: 'red', items: ['New games', 'Acessórios', '']},
+      {name: 'PS3', image: '/ps3-bg.jpg', color: '#3c2edd', items: ['jogo', 'Acessórios PS5']},
+      {name: 'PS4', image: '/ps4-bg.jpg', color: '#3c2edd', items: ['jogo', 'Acessórios PS5']},
+      {name: 'PS5', image: '/ps5-bg.jpg', color: '#3c2edd', items: ['jogo', 'Acessórios PS5']},
+      {name: 'XBOX', image: '/xbox-bg.png', color: 'green', items: ['jogo', 'Acessórios PS5']},
+      {name: 'PC', image: '/pc-bg.jpg', color: 'red', items: ['jogo', 'Acessórios PS5']},
    ],
    BANKS: [
       {
@@ -325,6 +309,8 @@ export const config = {
          color: '#2563eb'
       },
    ],
+   YEARS: ['2024','2025','2026','2027','2028','2029','2030','2031','2032','2033',],
+   MONTH: ['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December'],
    NEWGAMES: [
       {
          slug: 'os-melhores-jogos-de-desport',
@@ -346,44 +332,6 @@ export const config = {
          mainItem: {},
          cover: '/bg-hr.jpg',
          title: 'Os melhores jogos de terror da PlayStation'
-      },
-   ],
-   BLOGS: [
-      {
-         _id: '3r58888t3yh4h4u',
-         slug: 'official-playStation-podcast-episode-475',
-         title: 'Official PlayStation Podcast Episode 475: 2023 Enters the Halls of Valhalla',
-         subTitle: 'Featuring a discussion with developers from Santa Monica Studio on the God of War Ragnarök free epilogue DLC Valhalla.',
-         image: '/blog-god.webp',
-         descrition: '',
-         author: fakeUser,
-         comment: 1,
-         likes: 20,
-         audio: 1
-      },
-      {
-         _id: '3r5t3y333h4h4u',
-         slug: 'share-of-the-week-cyberpunk-2077',
-         title: 'Share of the Week: Cyberpunk 2077',
-         subTitle: '',
-         image: '/blog-cb.webp',
-         descrition: '',
-         author: fakeUser,
-         comment: 1,
-         likes: 20,
-         audio: 1
-      },
-      {
-         _id: '3r5t3yy67h4h4u',
-         slug: 'tekken-8-hands-on-with-arcade-quest',
-         title: 'Tekken 8: hands-on with Arcade Quest, Super Ghost Battles, and Tekken Ball',
-         subTitle: '',
-         image: '/blog-tk.webp',
-         descrition: '',
-         author: fakeUser,
-         comment: 1,
-         likes: 20,
-         audio: 1
       },
    ],
    EMOJES: [

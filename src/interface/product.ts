@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode } from "react"
 
 export interface IGameCard {
-   _id: string
+   postId: string
    title: string
    slug: string
    image: string
@@ -22,6 +22,11 @@ export interface ISgleGameItem {
       online: boolean;
       avalible: string[];
       violance: string[];
+      capas:{
+         name: string
+         image: string
+         price: number
+       }[]
       psn: string;
       type: string
       cover_image: string;
@@ -51,6 +56,11 @@ export interface GameItem {
    online: boolean;
    avalible: string[];
    violance: string[];
+   capas:{
+      name: string
+      image: string
+      price: number
+    }[]
    psn: string;
    type: string
    cover_image: string;
@@ -86,7 +96,7 @@ export interface IAceesory {
    discount: number
 }
 export interface CartItem {
-   _id: string;
+   postId: string;
    title: string;
    image: string
    price: number
