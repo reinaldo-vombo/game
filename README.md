@@ -1,5 +1,5 @@
 # Game Store
-![Demo Image](/demo.webp)
+![Demo Image](/public/demo.webp)
 
 Bem-vindo ao nosso projeto Game Store! Este aplicativo da web permite aos usuários explorar, comprar e desfrutar de seus jogos favoritos.
 
