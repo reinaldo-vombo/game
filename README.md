@@ -1,7 +1,7 @@
 # Game Store
-![Demo Image](/public/demo.webp)
+[![Demo Image](/public/demo-image.jpg)](https://game-ten-zeta.vercel.app/)
 
-Bem-vindo ao nosso projeto Game Store! Este aplicativo da web permite aos usuários explorar, comprar e desfrutar de seus jogos favoritos.
+Bem-vindo ao meu projeto Game Store! Este aplicativo da web permite aos usuários explorar, comprar e desfrutar de seus jogos favoritos.
 
 ## Core Features
 
@@ -34,7 +34,7 @@ Bem-vindo ao nosso projeto Game Store! Este aplicativo da web permite aos usuár
 - [Shadcn UI](https://shadcn-ui.com/): A CSS library for styling.
 ## Getting Started
 
-1. Clone the repository: `git clone https://github.com/your/repository.git`
+1. Clone the repository: `git clone https://github.com/reinaldo-vombo/game.git`
 2. Install dependencies: `npm install`
 3. Start the development server: `npm run dev`
 
